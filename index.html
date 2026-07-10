@@ -3,6 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Fx Team - Dashboard</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <style>
+        /* Estilos generales con vibra Gaming */
+        body {
+            background-color: #0d0e12;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding-bottom: 60px;
+        }
+
+        /* Contenedor Principal */
+        .container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 800px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Estilo para el Logo */
+        .team-logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 4px solid #eb75cd;
+            box-shadow: 0 0 20px rgba(243, 83, 216, 0.4);
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        /* Nombre del Equipo */
+        .team-name {
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 5px 0;
+            background: linear-gradient(45deg, #f184e3, #00bcff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Zona de Redes */
+        .creator-profile {
+            background: #161920;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #242936;
+            margin: 20px auto 40px auto;
+            max-width: 400px;
+        }
+
+        .creator-title {
+            color: #00bcff;
+            margin-top: 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .social-links a:hover { color: #00ffaa; }
+
+        /* Estilo base para las secciones/paneles */
+        .panel-section {
+            background: #161920;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #242936;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .panel-section h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        /* ================= DECORACIÓN RULETA ================= */
+        .roulette-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #ff0055;
+            z-index: 10;
+            filter: drop-shadow(0 0 5px #ff0055);
+        }
+
+        canvas {
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 238, 255, 0.2);
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
+        }
+
+        /* Formulario y Controles Comunes */
+        .config-box {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 25px;
+            border-top: 1px solid #242936;
+            padding-top: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #8a8f98;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .custom-input {
+            width: 100%;
+            background-color: #0d0e12;
+            border: 1px solid #242936;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            font-family: inherit;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            border-color: #00bcff;
+        }
+
+        /* Botones de acción */
+        .spin-btn {
+            background: linear-gradient(135deg, #ff0055, #9900ff);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+        .spin-btn:hover { box-shadow: 0 0 25px rgba(255, 0, 85, 0.7); }
+        .spin-btn:active { transform: scale(0.95); }
+
+        .action-btn {
+            background: #242936;
+            color: #00ffaa;
+            border: 1px solid #00ffaa;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .action-btn:hover { background: rgba(0, 255, 170, 0.1); }
+        .action-btn:active { transform: scale(0.95); }
+
+        #result-text {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #00ffaa;
+            height: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
+        }
+
+        /* ================= SECCIÓN DE GENERADOR DE TEAMS ================= */
+        .teams-display {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .team-card {
+            background: #0d0e12;
+            border: 1px solid #242936;
+            border-radius: 10px;
+            padding: 15px;
+            width: 180px;
+            text-align: left;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .team-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            border-bottom: 2px solid;
+            padding-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        /* Colores dinámicos para diferenciar los teams generados */
+        .team-card:nth-child(1) h3 { color: #00ffaa; border-color: #00ffaa; }
+        .team-card:nth-child(2) h3 { color: #00bcff; border-color: #00bcff; }
+        .team-card:nth-child(3) h3 { color: #ff0055; border-color: #ff0055; }
+        .team-card:nth-child(4) h3 { color: #9900ff; border-color: #9900ff; }
+
+        .team-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .team-card li {
+            padding: 6px 0;
+            font-size: 0.95rem;
+            border-bottom: 1px solid #161920;
+        }
+        .team-card li:last-child { border-bottom: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img class="team-logo" src="favicon.png" alt="Logo EFFECTS" onerror="this.src='https://via.placeholder.com/150/0d0e12/00ffaa?text=FX'">
+        <h1 class="team-name">EFFECTS</h1>
+
+        <div class="creator-profile">
+            <h3 class="creator-title">Owner</h3>
+            <p style="margin: 0 0 10px 0; font-size: 1.4rem; font-weight: bold; letter-spacing: 0.5px;">RoesIG</p>
+            <div class="social-links">
+                <a href="#" target="_blank">🔲 TikTok</a>
+                <a href="#" target="_blank">▶️ YouTube</a>
+            </div>
+        </div>
+
+        <div class="panel-section">
+            <h2>La Ruleta del Equipo</h2>
+            <p style="color: #8a8f98; margin-top: 0; margin-bottom: 5px;">¿Qué se juega hoy o qué reto toca?</p>
+            
+            <div class="roulette-container">
+                <div class="pointer"></div>
+                <canvas id="wheel" width="300" height="300"></canvas>
+            </div>
+
+            <button class="spin-btn" id="spin-trigger">Girar</button>
+            <div id="result-text"></div>
+
+            <div class="config-box">
+                <label class="input-label" for="options-input">Personalizar ruleta (separado por comas):</label>
+                <input type="text" id="options-input" class="custom-input" value="Valorant, Minecraft, CS2, Reto Extremo, Descanso, Elegir Mapa">
+                <button class="action-btn" id="update-trigger">Actualizar Opciones</button>
+            </div>
+        </div>
+
+        <div class="panel-section">
+            <h2>Creador de Teams Aleatorios</h2>
+            <p style="color: #8a8f98; margin-top: 0; margin-bottom: 20px;">Mezcla a la gente del lobby al azar en un clic</p>
+            
+            <div style="width: 100%; max-width: 450px; text-align: left;">
+                <label class="input-label" for="players-input">Ingresa los nombres (separados por comas):</label>
+                <input type="text" id="players-input" class="custom-input" value="Player1, Player2, Player3, Player4, Player5, Player6">
+                
+                <label class="input-label" for="teams-count">Número de equipos a formar:</label>
+                <input type="number" id="teams-count" class="custom-input" value="2" min="2" max="6" style="width: 80px;">
+                
+                <div style="text-align: center; margin-top: 10px;">
+                    <button class="spin-btn" id="generate-teams-btn">Generar Equipos</button>
+                </div>
+            </div>
+
+            <div class="teams-display" id="teams-output"></div>
+        </div>
+
+    </div>
+
+    <script>
+        /* --- LÓGICA DE LA RULETA --- */
+        let options = [];
+        const baseColors = ["#1a1d24", "#00ffaa", "#1a1d24", "#00bcff", "#1a1d24", "#ff0055", "#1a1d24", "#9900ff"];
+        let wheelColors = [];
+        
+        const canvas = document.getElementById("wheel");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spin-trigger");
+        const updateBtn = document.getElementById("update-trigger");
+        const optionsInput = document.getElementById("options-input");
+        const resultText = document.getElementById("result-text");
+
+        const size = canvas.width;
+        const center = size / 2;
+        let sliceAngle = 0;
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        function loadOptions() {
+            const text = optionsInput.value;
+            options = text.split(",").map(opt => opt.trim()).filter(opt => opt.length > 0);
+            if (options.length < 2) { alert("Pon al menos 2 opciones."); return; }
+            sliceAngle = (2 * Math.PI) / options.length;
+            wheelColors = [];
+            for (<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fx Team - Dashboard</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <style>

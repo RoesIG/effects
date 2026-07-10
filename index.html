@@ -89,6 +89,7 @@
             flex-direction: column;
             align-items: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
         }
 
         .roulette-container {
@@ -117,10 +118,52 @@
         canvas {
             border-radius: 50%;
             box-shadow: 0 0 20px rgba(0, 238, 255, 0.2);
-            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1); /* Efecto de frenado suave */
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1);
         }
 
-        /* Botón de Girar */
+        /* Controles de Configuración */
+        .roulette-config {
+            width: 100%;
+            max-width: 450px;
+            margin-top: 25px;
+            border-top: 1px solid #242936;
+            padding-top: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 0.9rem;
+            color: #8a8f98;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+
+        .options-input {
+            width: 100%;
+            background-color: #0d0e12;
+            border: 1px solid #242936;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            font-family: inherit;
+        }
+
+        .options-input:focus {
+            outline: none;
+            border-color: #00bcff;
+        }
+
+        /* Botones */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            width: 100%;
+        }
+
         .spin-btn {
             background: linear-gradient(135deg, #ff0055, #9900ff);
             color: white;
@@ -135,13 +178,25 @@
             transition: transform 0.1s, box-shadow 0.2s;
         }
 
-        .spin-btn:hover {
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.7);
+        .spin-btn:hover { box-shadow: 0 0 25px rgba(255, 0, 85, 0.7); }
+        .spin-btn:active { transform: scale(0.95); }
+
+        .update-btn {
+            background: #242936;
+            color: #00ffaa;
+            border: 1px solid #00ffaa;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
         }
 
-        .spin-btn:active {
-            transform: scale(0.95);
+        .update-btn:hover {
+            background: rgba(0, 255, 170, 0.1);
         }
+        .update-btn:active { transform: scale(0.95); }
 
         /* Texto del Resultado */
         #result-text {
@@ -158,7 +213,7 @@
 
     <div class="container">
         <!-- Encabezado del Equipo -->
-        <img class="team-logo" src="https://via.placeholder.com/150/0d0e12/00ffaa?text=LOGO" alt="Logo del Equipo">
+        <img class="team-logo" src="logo.png" alt="Logo del Equipo" onerror="this.src='https://via.placeholder.com/150/0d0e12/00ffaa?text=LOGO'">
         <h1 class="team-name">Tu Equipo Esports</h1>
 
         <!-- Tu Perfil -->
@@ -174,87 +229,125 @@
         <!-- Componente de la Ruleta -->
         <div class="roulette-section">
             <h2>La Ruleta del Equipo</h2>
-            <p style="color: #8a8f98; margin-top: 0;">¿Qué se juega hoy o qué reto toca?</p>
+            <p style="color: #8a8f98; margin-top: 0; margin-bottom: 5px;">¿Qué se juega hoy o qué reto toca?</p>
             
             <div class="roulette-container">
                 <div class="pointer"></div>
                 <canvas id="wheel" width="300" height="300"></canvas>
             </div>
 
-            <button class="spin-btn" id="spin-trigger">Girar</button>
+            <div class="btn-group">
+                <button class="spin-btn" id="spin-trigger">Girar</button>
+            </div>
+            
             <div id="result-text"></div>
+
+            <!-- Panel de configuración dinámica de la ruleta -->
+            <div class="roulette-config">
+                <label class="input-label" for="options-input">Personalizar opciones (sepáralas con comas):</label>
+                <input type="text" id="options-input" class="options-input" value="Valorant, Minecraft, CS2, Reto Extremo, Descanso, Elegir Mapa">
+                <button class="update-btn" id="update-trigger">Actualizar Opciones</button>
+            </div>
         </div>
     </div>
 
-    <!-- Lógica de la Ruleta en JavaScript -->
+    <!-- Lógica de la Ruleta Dinámica -->
     <script>
-        // Opciones por defecto (Cámbialas por las que tú quieras dentro de las comillas)
-        const options = ["Valorant", "Minecraft", "CS2", "Reto Extremo", "Descanso", "Elegir Mapa", "Penitencia", "Por la Anécdota"];
-        
-        // Colores de los gajos (Estilo neón/oscuro intercalados)
-        const colors = ["#1a1d24", "#00ffaa", "#1a1d24", "#00bcff", "#1a1d24", "#ff0055", "#1a1d24", "#9900ff"];
+        // Lista base de opciones y paleta de colores para el renderizado
+        let options = [];
+        const baseColors = ["#1a1d24", "#00ffaa", "#1a1d24", "#00bcff", "#1a1d24", "#ff0055", "#1a1d24", "#9900ff"];
+        let wheelColors = [];
         
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
         const spinBtn = document.getElementById("spin-trigger");
+        const updateBtn = document.getElementById("update-trigger");
+        const optionsInput = document.getElementById("options-input");
         const resultText = document.getElementById("result-text");
 
         const size = canvas.width;
         const center = size / 2;
-        const sliceAngle = (2 * Math.PI) / options.length;
+        let sliceAngle = 0;
         let currentRotation = 0;
         let isSpinning = false;
 
-        // Dibujar la ruleta en el lienzo canvas
+        // Carga y procesa lo que esté escrito en el cuadro de texto
+        function loadOptions() {
+            const text = optionsInput.value;
+            // Separa el texto por comas, limpia espacios en blanco y quita elementos vacíos
+            options = text.split(",").map(opt => opt.trim()).filter(opt => opt.length > 0);
+            
+            if (options.length < 2) {
+                alert("Por favor pon al menos 2 opciones para poder armar la ruleta.");
+                return;
+            }
+
+            sliceAngle = (2 * Math.PI) / options.length;
+            
+            // Asignar colores dinámicamente según la cantidad de opciones
+            wheelColors = [];
+            for (let i = 0; i < options.length; i++) {
+                wheelColors.push(baseColors[i % baseColors.length]);
+            }
+            
+            // Reajustar rotación visual a cero sin animar para que se vea limpio el cambio
+            canvas.style.transition = "none";
+            currentRotation = 0;
+            canvas.style.transform = `rotate(0deg)`;
+            
+            // Forzar un leve retraso para que el navegador asimile el reset antes de redibujar
+            setTimeout(() => {
+                canvas.style.transition = "transform 4s cubic-bezier(0.1, 0.8, 0.2, 1)";
+                drawWheel();
+            }, 50);
+        }
+
+        // Renderiza los gráficos de los gajos y textos en el lienzo
         function drawWheel() {
             ctx.clearRect(0, 0, size, size);
             
             options.forEach((opt, idx) => {
                 const angle = idx * sliceAngle;
                 
-                // Dibujar gajo
                 ctx.beginPath();
-                ctx.fillStyle = colors[idx];
+                ctx.fillStyle = wheelColors[idx];
                 ctx.moveTo(center, center);
                 ctx.arc(center, center, center - 5, angle, angle + sliceAngle);
                 ctx.lineTo(center, center);
                 ctx.fill();
                 
-                // Texto de la opción
                 ctx.save();
                 ctx.translate(center, center);
                 ctx.rotate(angle + sliceAngle / 2);
                 ctx.textAlign = "right";
-                // Ajustar color del texto dependiendo del fondo para que se lea bien
-                ctx.fillStyle = colors[idx] === "#1a1d24" ? "#ffffff" : "#0d0e12";
-                ctx.font = "bold 13px sans-serif";
-                ctx.fillText(opt, center - 20, 5);
+                ctx.fillStyle = wheelColors[idx] === "#1a1d24" ? "#ffffff" : "#0d0e12";
+                
+                // Reducir un poco el tamaño de letra si hay demasiadas opciones escritas
+                const fontSize = options.length > 10 ? "10px" : "13px";
+                ctx.font = `bold ${fontSize} sans-serif`;
+                
+                // Cortar texto si es ridículamente largo para que no se salga de la ruleta
+                const maxTextLength = opt.length > 15 ? opt.substring(0, 13) + "..." : opt;
+                ctx.fillText(maxTextLength, center - 20, 4);
                 ctx.restore();
             });
         }
 
-        // Función para procesar el giro
         function spin() {
-            if (isSpinning) return;
+            if (isSpinning || options.length < 2) return;
             isSpinning = true;
             resultText.innerText = "Girando...";
 
-            // Generar un giro aleatorio grande (entre 5 y 10 vueltas completas) más un desfase
             const extraDegrees = Math.floor(Math.random() * 360);
-            const totalSpins = 5 + Math.floor(Math.random() * 5);
+            const totalSpins = 6 + Math.floor(Math.random() * 4);
             const targetRotation = currentRotation + (totalSpins * 360) + extraDegrees;
             
-            // Aplicar la rotación visual usando CSS
             canvas.style.transform = `rotate(${targetRotation}deg)`;
-            
-            // Guardar la posición actual para el próximo tiro
             currentRotation = targetRotation;
 
-            // Calcular qué opción cae cuando termine la animación (4 segundos)
             setTimeout(() => {
                 isSpinning = false;
-                
-                // Calcular el ángulo neto final orientado hacia arriba (flecha)
+                // Ajustar el ángulo respecto a la aguja que está clavada arriba (270 grados en el círculo trigonométrico)
                 const actualAngle = (360 - (targetRotation % 360) + 270) % 360; 
                 const winningIndex = Math.floor(actualAngle / (360 / options.length)) % options.length;
                 
@@ -262,9 +355,10 @@
             }, 4000);
         }
 
-        // Inicializar
-        drawWheel();
+        // Eventos iniciales
+        loadOptions();
         spinBtn.addEventListener("click", spin);
+        updateBtn.addEventListener("click", loadOptions);
     </script>
 </body>
 </html>

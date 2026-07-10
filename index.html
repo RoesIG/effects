@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esports Team - Home</title>
+    <style>
+        
+        body {
+            background-color: #0d0e12;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+
+       
+        .team-logo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid #00ffaa;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
+            object-fit: cover;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-logo:hover {
+            transform: scale(1.05);
+        }
+
+      
+        .team-name {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0 0 10px 0;
+            background: linear-gradient(45deg, #00ffaa, #00bcff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 255, 170, 0.2);
+        }
+
+    
+        .team-slogan {
+            font-size: 1.2rem;
+            color: #8a8f98;
+            margin-bottom: 40px;
+        }
+
+      
+        .creator-profile {
+            background: #161920;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #242936;
+            margin-top: 20px;
+        }
+
+        .creator-title {
+            color: #00bcff;
+            margin-top: 0;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <!-- Logo del equipo (Puedes cambiar el link por tu imagen real más adelante) -->
+        <img class="team-logo" src="https://via.placeholder.com/150/0d0e12/00ffaa?text=LOGO" alt="Logo del Equipo">
+        
+        <!-- Nombre de la organización -->
+        <h1 class="team-name">Tu Equipo Esports</h1>
+        <p class="team-slogan">Bienvenidos al sitio oficial del equipo.</p>
+
+        <!-- Sección de redes inicial -->
+        <div class="creator-profile">
+            <h3 class="creator-title">Líder del Proyecto</h3>
+            <p style="margin: 5px 0; font-size: 1.3rem; font-weight: bold;">Roes</p>
+            <p style="color: #8a8f98; font-size: 0.9rem; margin-bottom: 0;">Próximamente los links a las redes de YouTube y TikTok aquí.</p>
+        </div>
+    </div>
+
+</body>
+</html>

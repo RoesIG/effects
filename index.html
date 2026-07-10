@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Esports Team - Home</title>
+    <title>Esports Team - Dashboard</title>
     <style>
-        
+        /* Estilos generales con vibra Gaming */
         body {
             background-color: #0d0e12;
             color: #ffffff;
@@ -16,85 +16,255 @@
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            padding-bottom: 50px;
         }
 
-        
-        .hero-section {
+        /* Contenedor Principal */
+        .container {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             max-width: 800px;
             width: 100%;
         }
 
-       
+        /* Estilo para el Logo */
         .team-logo {
-            width: 150px;
-            height: 150px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             border: 4px solid #00ffaa;
             box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
             object-fit: cover;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease;
+            margin-bottom: 15px;
         }
 
-        .team-logo:hover {
-            transform: scale(1.05);
-        }
-
-      
+        /* Nombre del Equipo */
         .team-name {
-            font-size: 3rem;
+            font-size: 2.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0 0 10px 0;
+            margin: 0 0 5px 0;
             background: linear-gradient(45deg, #00ffaa, #00bcff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 30px rgba(0, 255, 170, 0.2);
         }
 
-    
-        .team-slogan {
-            font-size: 1.2rem;
-            color: #8a8f98;
-            margin-bottom: 40px;
-        }
-
-      
+        /* Zona de Redes */
         .creator-profile {
             background: #161920;
-            padding: 20px;
+            padding: 15px;
             border-radius: 12px;
             border: 1px solid #242936;
-            margin-top: 20px;
+            margin: 20px auto 40px auto;
+            max-width: 400px;
         }
 
         .creator-title {
             color: #00bcff;
             margin-top: 0;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Enlaces de Redes */
+        .social-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .social-links a:hover {
+            color: #00ffaa;
+        }
+
+        /* ================= SECCIÓN DE LA RULETA ================= */
+        .roulette-section {
+            background: #161920;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #242936;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .roulette-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 20px 0;
+        }
+
+        /* El marcador/flecha que apunta arriba */
+        .pointer {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #ff0055;
+            z-index: 10;
+            filter: drop-shadow(0 0 5px #ff0055);
+        }
+
+        /* El lienzo donde se dibuja la ruleta */
+        canvas {
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 238, 255, 0.2);
+            transition: transform 4s cubic-bezier(0.1, 0.8, 0.2, 1); /* Efecto de frenado suave */
+        }
+
+        /* Botón de Girar */
+        .spin-btn {
+            background: linear-gradient(135deg, #ff0055, #9900ff);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+            transition: transform 0.1s, box-shadow 0.2s;
+        }
+
+        .spin-btn:hover {
+            box-shadow: 0 0 25px rgba(255, 0, 85, 0.7);
+        }
+
+        .spin-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Texto del Resultado */
+        #result-text {
+            margin-top: 20px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #00ffaa;
+            height: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="hero-section">
-        <!-- Logo del equipo (Puedes cambiar el link por tu imagen real más adelante) -->
+    <div class="container">
+        <!-- Encabezado del Equipo -->
         <img class="team-logo" src="https://via.placeholder.com/150/0d0e12/00ffaa?text=LOGO" alt="Logo del Equipo">
-        
-        <!-- Nombre de la organización -->
         <h1 class="team-name">Tu Equipo Esports</h1>
-        <p class="team-slogan">Bienvenidos al sitio oficial del equipo.</p>
 
-        <!-- Sección de redes inicial -->
+        <!-- Tu Perfil -->
         <div class="creator-profile">
-            <h3 class="creator-title">Líder del Proyecto</h3>
-            <p style="margin: 5px 0; font-size: 1.3rem; font-weight: bold;">Roes</p>
-            <p style="color: #8a8f98; font-size: 0.9rem; margin-bottom: 0;">Próximamente los links a las redes de YouTube y TikTok aquí.</p>
+            <h3 class="creator-title">Fundador</h3>
+            <p style="margin: 0 0 10px 0; font-size: 1.4rem; font-weight: bold; letter-spacing: 0.5px;">Roes</p>
+            <div class="social-links">
+                <a href="#" target="_blank">🔲 TikTok</a>
+                <a href="#" target="_blank">▶️ YouTube</a>
+            </div>
+        </div>
+
+        <!-- Componente de la Ruleta -->
+        <div class="roulette-section">
+            <h2>La Ruleta del Equipo</h2>
+            <p style="color: #8a8f98; margin-top: 0;">¿Qué se juega hoy o qué reto toca?</p>
+            
+            <div class="roulette-container">
+                <div class="pointer"></div>
+                <canvas id="wheel" width="300" height="300"></canvas>
+            </div>
+
+            <button class="spin-btn" id="spin-trigger">Girar</button>
+            <div id="result-text"></div>
         </div>
     </div>
 
+    <!-- Lógica de la Ruleta en JavaScript -->
+    <script>
+        // Opciones por defecto (Cámbialas por las que tú quieras dentro de las comillas)
+        const options = ["Valorant", "Minecraft", "CS2", "Reto Extremo", "Descanso", "Elegir Mapa", "Penitencia", "Por la Anécdota"];
+        
+        // Colores de los gajos (Estilo neón/oscuro intercalados)
+        const colors = ["#1a1d24", "#00ffaa", "#1a1d24", "#00bcff", "#1a1d24", "#ff0055", "#1a1d24", "#9900ff"];
+        
+        const canvas = document.getElementById("wheel");
+        const ctx = canvas.getContext("2d");
+        const spinBtn = document.getElementById("spin-trigger");
+        const resultText = document.getElementById("result-text");
+
+        const size = canvas.width;
+        const center = size / 2;
+        const sliceAngle = (2 * Math.PI) / options.length;
+        let currentRotation = 0;
+        let isSpinning = false;
+
+        // Dibujar la ruleta en el lienzo canvas
+        function drawWheel() {
+            ctx.clearRect(0, 0, size, size);
+            
+            options.forEach((opt, idx) => {
+                const angle = idx * sliceAngle;
+                
+                // Dibujar gajo
+                ctx.beginPath();
+                ctx.fillStyle = colors[idx];
+                ctx.moveTo(center, center);
+                ctx.arc(center, center, center - 5, angle, angle + sliceAngle);
+                ctx.lineTo(center, center);
+                ctx.fill();
+                
+                // Texto de la opción
+                ctx.save();
+                ctx.translate(center, center);
+                ctx.rotate(angle + sliceAngle / 2);
+                ctx.textAlign = "right";
+                // Ajustar color del texto dependiendo del fondo para que se lea bien
+                ctx.fillStyle = colors[idx] === "#1a1d24" ? "#ffffff" : "#0d0e12";
+                ctx.font = "bold 13px sans-serif";
+                ctx.fillText(opt, center - 20, 5);
+                ctx.restore();
+            });
+        }
+
+        // Función para procesar el giro
+        function spin() {
+            if (isSpinning) return;
+            isSpinning = true;
+            resultText.innerText = "Girando...";
+
+            // Generar un giro aleatorio grande (entre 5 y 10 vueltas completas) más un desfase
+            const extraDegrees = Math.floor(Math.random() * 360);
+            const totalSpins = 5 + Math.floor(Math.random() * 5);
+            const targetRotation = currentRotation + (totalSpins * 360) + extraDegrees;
+            
+            // Aplicar la rotación visual usando CSS
+            canvas.style.transform = `rotate(${targetRotation}deg)`;
+            
+            // Guardar la posición actual para el próximo tiro
+            currentRotation = targetRotation;
+
+            // Calcular qué opción cae cuando termine la animación (4 segundos)
+            setTimeout(() => {
+                isSpinning = false;
+                
+                // Calcular el ángulo neto final orientado hacia arriba (flecha)
+                const actualAngle = (360 - (targetRotation % 360) + 270) % 360; 
+                const winningIndex = Math.floor(actualAngle / (360 / options.length)) % options.length;
+                
+                resultText.innerText = `🎉 ¡Cayó: ${options[winningIndex]}!`;
+            }, 4000);
+        }
+
+        // Inicializar
+        drawWheel();
+        spinBtn.addEventListener("click", spin);
+    </script>
 </body>
 </html>

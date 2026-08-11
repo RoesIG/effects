@@ -566,7 +566,7 @@
                 <div class="chat-panel-title">💬 CHAT EN VIVO</div>
                 <iframe 
                     id="twitch-chat-embed"
-                    src="https://www.twitch.tv/embed/roesig/chat?parent=localhost"
+                    src="about:blank"
                     height="100%" 
                     width="100%" 
                     style="border: none; border-radius: 10px;">
@@ -720,11 +720,11 @@
     </div>
 
     <script>
-        // --- AUTO DETECTAR DOMINIO PARA CHAT TWITCH ---
+        // --- CHAT DE TWITCH EN MODO OSCURO ---
         window.addEventListener("DOMContentLoaded", () => {
             const currentHost = window.location.hostname || "localhost";
             const twitchEmbed = document.getElementById("twitch-chat-embed");
-            twitchEmbed.src = `https://www.twitch.tv/embed/roesig/chat?parent=${currentHost}`;
+            twitchEmbed.src = `https://www.twitch.tv/embed/roesig/chat?parent=${currentHost}&darkpopout`;
         });
 
         // --- RULETA ---

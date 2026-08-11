@@ -53,11 +53,6 @@
             gap: 12px;
         }
 
-        .team-logo-head {
-            height: 35px;
-            width: auto;
-        }
-
         .nav-links {
             display: flex;
             gap: 25px;
@@ -437,15 +432,15 @@
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
         }
 
         .tool-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 15px;
+            padding: 18px;
             text-align: left;
             cursor: pointer;
             transition: 0.2s;
@@ -453,26 +448,27 @@
 
         .tool-card:hover {
             border-color: var(--accent-pink);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.2);
         }
 
         .tool-icon {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 8px;
         }
 
         .tool-name {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: bold;
             margin-bottom: 4px;
         }
 
         .tool-desc {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
         }
 
-        /* FOOTER */
+        /* FOOTER SIMPLIFICADO */
         footer {
             margin-top: auto;
             padding: 20px 40px;
@@ -480,20 +476,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             background: var(--panel-bg);
         }
 
-        /* MODAL CONFIG */
+        /* MODALES */
         .modal {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             justify-content: center;
             align-items: center;
             z-index: 100;
+            backdrop-filter: blur(5px);
         }
 
         .modal-content {
@@ -503,12 +500,49 @@
             border-radius: 16px;
             width: 90%;
             max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .close-modal:hover { color: white; }
+
+        /* ESTILO CARA O CRUZ */
+        .coin {
+            width: 100px;
+            height: 100px;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #ffd700, #ff8800);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: transform 1s ease-out;
+        }
+
+        /* ESTILO TIMER */
+        .timer-display {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: var(--accent-cyan);
+            margin: 15px 0;
+            font-family: monospace;
         }
 
         @media (max-width: 1024px) {
-            .dashboard-container {
-                grid-template-columns: 1fr;
-            }
+            .dashboard-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -602,9 +636,7 @@
 
             <button class="btn-girar" id="generate-teams-btn" style="background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple)); width: 100%;">GENERAR EQUIPOS</button>
 
-            <div class="teams-output-container" id="teams-output">
-                <!-- Se llena con JS -->
-            </div>
+            <div class="teams-output-container" id="teams-output"></div>
         </div>
 
     </div>
@@ -614,25 +646,20 @@
         <div class="bottom-panel">
             <div class="bottom-title">MÁS HERRAMIENTAS</div>
             <div class="tools-grid">
-                <div class="tool-card">
+                <div class="tool-card" id="card-coin">
                     <div class="tool-icon">🪙</div>
                     <div class="tool-name">Cara o Cruz</div>
                     <div class="tool-desc">Lanza una moneda al azar</div>
                 </div>
-                <div class="tool-card">
+                <div class="tool-card" id="card-num">
                     <div class="tool-icon">🎲</div>
                     <div class="tool-name">Número Aleatorio</div>
-                    <div class="tool-desc">Genera un número en rango</div>
+                    <div class="tool-desc">Genera un número en un rango</div>
                 </div>
-                <div class="tool-card">
-                    <div class="tool-icon">👤</div>
-                    <div class="tool-name">Elegir Persona</div>
-                    <div class="tool-desc">Elige una persona de la lista</div>
-                </div>
-                <div class="tool-card">
+                <div class="tool-card" id="card-timer">
                     <div class="tool-icon">⏱️</div>
                     <div class="tool-name">Temporizador</div>
-                    <div class="tool-desc">Cuenta regresiva</div>
+                    <div class="tool-desc">Cuenta regresiva personalizable</div>
                 </div>
             </div>
         </div>
@@ -640,14 +667,14 @@
 
     <!-- FOOTER -->
     <footer>
-        <div><strong>FX TEAM</strong> - Herramientas para creadores de contenido</div>
-        <div>" ENFOCADOS EN EL STREAM, UNIDOS EN EL JUEGO "</div>
-        <div>© 2026 FX Team. Hecho por RoesIG</div>
+        <div><strong>FX TEAM</strong></div>
+        <div>© 2026 FX Team. Todos los derechos reservados.</div>
     </footer>
 
-    <!-- MODAL EDITAR OPCIONES -->
+    <!-- MODAL EDITAR RULETA -->
     <div class="modal" id="config-modal">
         <div class="modal-content">
+            <span class="close-modal">&times;</span>
             <h3 style="margin-bottom: 15px;">Editar Opciones de Ruleta</h3>
             <label class="form-label">Separa las opciones por comas:</label>
             <input type="text" id="options-input" class="form-input" value="Minecraft, Elegir Mapa, Valorant, Descanso, CS2, Otro Juego" style="margin-bottom: 15px;">
@@ -655,102 +682,182 @@
         </div>
     </div>
 
+    <!-- MODAL CARA O CRUZ -->
+    <div class="modal" id="modal-coin">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Cara o Cruz</h3>
+            <div class="coin" id="coin-element">?</div>
+            <button class="btn-girar" id="flip-coin-btn" style="width: 100%;">Lanzar Moneda</button>
+        </div>
+    </div>
+
+    <!-- MODAL NUMERO ALEATORIO -->
+    <div class="modal" id="modal-num">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3 style="margin-bottom: 15px;">Número Aleatorio</h3>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <div>
+                    <label class="form-label">MÍNIMO</label>
+                    <input type="number" id="num-min" class="form-input" value="1">
+                </div>
+                <div>
+                    <label class="form-label">MÁXIMO</label>
+                    <input type="number" id="num-max" class="form-input" value="100">
+                </div>
+            </div>
+            <div id="random-num-result" style="font-size: 2.5rem; font-weight: bold; color: var(--accent-cyan); margin-bottom: 15px;">?</div>
+            <button class="btn-girar" id="gen-num-btn" style="width: 100%;">Generar</button>
+        </div>
+    </div>
+
+    <!-- MODAL TEMPORIZADOR -->
+    <div class="modal" id="modal-timer">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>Temporizador</h3>
+            <div class="timer-display" id="timer-display">05:00</div>
+            <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                <input type="number" id="timer-min-input" class="form-input" value="5" min="1" placeholder="Minutos">
+                <button class="btn-config" id="set-timer-btn">Set</button>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-girar" id="start-timer-btn" style="width: 50%;">Iniciar</button>
+                <button class="btn-config" id="reset-timer-btn" style="width: 50%;">Reiniciar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // RULETA
+        // --- RULETA ---
         let options = ["Minecraft", "Elegir Mapa", "Valorant", "Descanso", "CS2", "Otro Juego"];
         const colors = ["#00d9ff", "#ff007f", "#00ffaa", "#8a2be2", "#151a26", "#ffb703"];
-        
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
         const spinBtn = document.getElementById("spin-btn");
         const resultDisplay = document.getElementById("result-display");
-        
-        let currentRotation = 0;
-        let isSpinning = false;
+        let currentRotation = 0, isSpinning = false;
 
         function drawWheel() {
-            const size = canvas.width;
-            const center = size / 2;
-            const sliceAngle = (2 * Math.PI) / options.length;
-
+            const size = canvas.width, center = size / 2, sliceAngle = (2 * Math.PI) / options.length;
             ctx.clearRect(0, 0, size, size);
-
             options.forEach((opt, i) => {
                 const angle = i * sliceAngle;
-                ctx.beginPath();
-                ctx.fillStyle = colors[i % colors.length];
-                ctx.moveTo(center, center);
-                ctx.arc(center, center, center - 5, angle, angle + sliceAngle);
-                ctx.lineTo(center, center);
-                ctx.fill();
-
-                // Texto
-                ctx.save();
-                ctx.translate(center, center);
-                ctx.rotate(angle + sliceAngle / 2);
-                ctx.textAlign = "right";
-                ctx.fillStyle = "#ffffff";
-                ctx.font = "bold 12px sans-serif";
-                ctx.fillText(opt, center - 20, 4);
-                ctx.restore();
+                ctx.beginPath(); ctx.fillStyle = colors[i % colors.length];
+                ctx.moveTo(center, center); ctx.arc(center, center, center - 5, angle, angle + sliceAngle);
+                ctx.lineTo(center, center); ctx.fill();
+                ctx.save(); ctx.translate(center, center); ctx.rotate(angle + sliceAngle / 2);
+                ctx.textAlign = "right"; ctx.fillStyle = "#ffffff"; ctx.font = "bold 12px sans-serif";
+                ctx.fillText(opt, center - 20, 4); ctx.restore();
             });
         }
 
         spinBtn.addEventListener("click", () => {
             if (isSpinning) return;
-            isSpinning = true;
-            resultDisplay.innerText = "GIRANDO...";
-
-            const extraDegrees = Math.floor(Math.random() * 360);
-            const totalSpins = 5 * 360;
-            const targetRotation = currentRotation + totalSpins + extraDegrees;
-
+            isSpinning = true; resultDisplay.innerText = "GIRANDO...";
+            const targetRotation = currentRotation + (5 * 360) + Math.floor(Math.random() * 360);
             canvas.style.transform = `rotate(${targetRotation}deg)`;
             currentRotation = targetRotation;
-
             setTimeout(() => {
                 isSpinning = false;
                 const actualAngle = (360 - (targetRotation % 360) + 270) % 360;
-                const index = Math.floor(actualAngle / (360 / options.length)) % options.length;
-                resultDisplay.innerText = options[index];
+                resultDisplay.innerText = options[Math.floor(actualAngle / (360 / options.length)) % options.length];
             }, 4000);
         });
 
-        // MODAL RULETA
-        const modal = document.getElementById("config-modal");
-        document.getElementById("open-config-btn").onclick = () => modal.style.display = "flex";
-        document.getElementById("save-options-btn").onclick = () => {
-            const val = document.getElementById("options-input").value;
-            options = val.split(",").map(s => s.trim()).filter(s => s.length > 0);
-            drawWheel();
-            modal.style.display = "none";
-        };
-
-        // CREADOR DE EQUIPOS
+        // --- CREADOR DE EQUIPOS ---
         let teamsCount = 2;
         const countVal = document.getElementById("teams-count-val");
         document.getElementById("minus-btn").onclick = () => { if(teamsCount > 2) teamsCount--; countVal.innerText = teamsCount; };
         document.getElementById("plus-btn").onclick = () => { if(teamsCount < 4) teamsCount++; countVal.innerText = teamsCount; };
 
         document.getElementById("generate-teams-btn").onclick = () => {
-            const raw = document.getElementById("players-input").value;
-            let players = raw.split(",").map(p => p.trim()).filter(p => p.length > 0);
-            
-            // Mezclar
+            let players = document.getElementById("players-input").value.split(",").map(p => p.trim()).filter(p => p.length > 0);
             players.sort(() => Math.random() - 0.5);
-
             let teams = Array.from({ length: teamsCount }, () => []);
             players.forEach((p, i) => teams[i % teamsCount].push(p));
-
-            const output = document.getElementById("teams-output");
-            output.innerHTML = "";
-
+            const output = document.getElementById("teams-output"); output.innerHTML = "";
             teams.forEach((team, i) => {
-                const box = document.createElement("div");
-                box.className = "team-box";
+                const box = document.createElement("div"); box.className = "team-box";
                 box.innerHTML = `<div class="team-box-title">EQUIPO ${i + 1}</div><ul>${team.map(p => `<li>• ${p}</li>`).join('')}</ul>`;
                 output.appendChild(box);
             });
+        };
+
+        // --- CONTROL DE MODALES ---
+        const closeBtns = document.querySelectorAll(".close-modal");
+        closeBtns.forEach(btn => btn.onclick = () => btn.closest(".modal").style.display = "none");
+
+        document.getElementById("open-config-btn").onclick = () => document.getElementById("config-modal").style.display = "flex";
+        document.getElementById("save-options-btn").onclick = () => {
+            options = document.getElementById("options-input").value.split(",").map(s => s.trim()).filter(s => s.length > 0);
+            drawWheel(); document.getElementById("config-modal").style.display = "none";
+        };
+
+        // --- CARA O CRUZ ---
+        const coinModal = document.getElementById("modal-coin");
+        const coinEl = document.getElementById("coin-element");
+        document.getElementById("card-coin").onclick = () => coinModal.style.display = "flex";
+        document.getElementById("flip-coin-btn").onclick = () => {
+            coinEl.style.transform = "rotateY(720deg)";
+            coinEl.innerText = "???";
+            setTimeout(() => {
+                const res = Math.random() < 0.5 ? "CARA" : "CRUZ";
+                coinEl.innerText = res;
+                coinEl.style.transform = "rotateY(0deg)";
+            }, 600);
+        };
+
+        // --- NÚMERO ALEATORIO ---
+        const numModal = document.getElementById("modal-num");
+        document.getElementById("card-num").onclick = () => numModal.style.display = "flex";
+        document.getElementById("gen-num-btn").onclick = () => {
+            const min = parseInt(document.getElementById("num-min").value) || 1;
+            const max = parseInt(document.getElementById("num-max").value) || 100;
+            const res = Math.floor(Math.random() * (max - min + 1)) + min;
+            document.getElementById("random-num-result").innerText = res;
+        };
+
+        // --- TEMPORIZADOR ---
+        const timerModal = document.getElementById("modal-timer");
+        let timerInterval = null, totalSeconds = 300;
+        const timerDisplay = document.getElementById("timer-display");
+
+        function updateTimerDisplay() {
+            const m = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+            const s = String(totalSeconds % 60).padStart(2, '0');
+            timerDisplay.innerText = `${m}:${s}`;
+        }
+
+        document.getElementById("card-timer").onclick = () => timerModal.style.display = "flex";
+        document.getElementById("set-timer-btn").onclick = () => {
+            const mins = parseInt(document.getElementById("timer-min-input").value) || 5;
+            totalSeconds = mins * 60; updateTimerDisplay();
+        };
+
+        document.getElementById("start-timer-btn").onclick = function() {
+            if (timerInterval) {
+                clearInterval(timerInterval); timerInterval = null;
+                this.innerText = "Iniciar";
+            } else {
+                this.innerText = "Pausar";
+                timerInterval = setInterval(() => {
+                    if (totalSeconds > 0) {
+                        totalSeconds--; updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval); timerInterval = null;
+                        alert("⏰ ¡Tiempo terminado!");
+                    }
+                }, 1000);
+            }
+        };
+
+        document.getElementById("reset-timer-btn").onclick = () => {
+            clearInterval(timerInterval); timerInterval = null;
+            document.getElementById("start-timer-btn").innerText = "Iniciar";
+            const mins = parseInt(document.getElementById("timer-min-input").value) || 5;
+            totalSeconds = mins * 60; updateTimerDisplay();
         };
 
         // Inicializar

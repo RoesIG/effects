@@ -128,30 +128,20 @@
             background: linear-gradient(135deg, rgba(255, 0, 127, 0.1), rgba(0, 217, 255, 0.1));
             border: 1px solid var(--border-color);
             border-radius: 16px;
-            padding: 25px 20px;
+            padding: 35px 20px;
+            text-align: center;
         }
 
         .hero-title {
-            font-size: 2rem;
+            font-size: 2.8rem;
             font-weight: 900;
             font-style: italic;
             background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        .hero-subtitle {
-            color: var(--accent-cyan);
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .hero-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.4;
+            line-height: 1.1;
+            letter-spacing: 1px;
+            filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.3));
         }
 
         .tools-menu {
@@ -573,14 +563,12 @@
         <div class="sidebar">
             <div class="hero-banner">
                 <h1 class="hero-title">FX TOOLS</h1>
-                <div class="hero-subtitle">Herramientas para el stream</div>
-                <p class="hero-desc">Todo lo que necesitamos para los directos y partidas, en un solo lugar.</p>
             </div>
             <div class="tools-menu">
                 <button class="menu-btn active">🎰 Aleatorio</button>
                 <button class="menu-btn">👥 Equipos</button>
-                <button class="menu-btn">⏱️ Contadores</button>
-                <button class="menu-btn">💬 Chat</button>
+                <button class="menu-btn" id="menu-btn-timer">⏱️ Contadores</button>
+                <button class="menu-btn" id="menu-btn-chat">💬 Chat</button>
             </div>
         </div>
 
@@ -729,6 +717,21 @@
         </div>
     </div>
 
+    <!-- MODAL CHAT DE TWITCH -->
+    <div class="modal" id="modal-chat">
+        <div class="modal-content" style="max-width: 450px; padding: 15px;">
+            <span class="close-modal">&times;</span>
+            <h3 style="margin-bottom: 12px; font-size: 1rem; color: var(--accent-cyan);">💬 Chat en Vivo - Twitch</h3>
+            <iframe 
+                id="twitch-chat-embed"
+                src="https://www.twitch.tv/embed/roesig/chat?parent=localhost"
+                height="500" 
+                width="100%" 
+                style="border: none; border-radius: 10px;">
+            </iframe>
+        </div>
+    </div>
+
     <script>
         // --- RULETA ---
         let options = ["Minecraft", "Elegir Mapa", "Valorant", "Descanso", "CS2", "Otro Juego"];
@@ -793,6 +796,21 @@
         document.getElementById("save-options-btn").onclick = () => {
             options = document.getElementById("options-input").value.split(",").map(s => s.trim()).filter(s => s.length > 0);
             drawWheel(); document.getElementById("config-modal").style.display = "none";
+        };
+
+        // --- CHAT DE TWITCH ---
+        const chatModal = document.getElementById("modal-chat");
+        const twitchEmbed = document.getElementById("twitch-chat-embed");
+
+        document.getElementById("menu-btn-chat").onclick = () => {
+            const currentHost = window.location.hostname || "localhost";
+            twitchEmbed.src = `https://www.twitch.tv/embed/roesig/chat?parent=${currentHost}`;
+            chatModal.style.display = "flex";
+        };
+
+        // --- BOTON CONTADORES / TEMPORIZADOR MENU ---
+        document.getElementById("menu-btn-timer").onclick = () => {
+            document.getElementById("modal-timer").style.display = "flex";
         };
 
         // --- CARA O CRUZ ---

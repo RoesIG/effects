@@ -7,13 +7,18 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
+            /* PALETA DE COLORES */
             --bg-dark: #07090e;
             --panel-bg: #0f131c;
             --card-bg: #151a26;
             --border-color: #1e2638;
-            --accent-pink: #ff007f;
+            
+            /* Colores de Marca FX */
+            --logo-pink-light: #ff52ae;
+            --logo-pink-dark: #d9006c;
             --accent-cyan: #00d9ff;
             --accent-purple: #8a2be2;
+            
             --text-main: #ffffff;
             --text-muted: #7e8b9b;
         }
@@ -32,7 +37,7 @@
             display: flex;
             flex-direction: column;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(255, 0, 127, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 10% 20%, rgba(217, 0, 108, 0.1) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(0, 217, 255, 0.08) 0%, transparent 40%);
         }
 
@@ -41,8 +46,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background: rgba(15, 19, 28, 0.8);
+            padding: 12px 40px;
+            background: rgba(15, 19, 28, 0.85);
             border-bottom: 1px solid var(--border-color);
             backdrop-filter: blur(10px);
         }
@@ -51,6 +56,30 @@
             display: flex;
             align-items: center;
             gap: 12px;
+        }
+
+        .header-logo-img {
+            height: 38px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(217, 0, 108, 0.4));
+        }
+
+        .brand-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            font-style: italic;
+            letter-spacing: 1.5px;
+        }
+
+        .brand-title .fx-white {
+            color: #ffffff;
+        }
+
+        .brand-title .team-pink {
+            background: linear-gradient(135deg, var(--logo-pink-light), var(--logo-pink-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .nav-links {
@@ -102,8 +131,8 @@
         }
 
         .social-icon:hover {
-            border-color: var(--accent-pink);
-            box-shadow: 0 0 10px rgba(255, 0, 127, 0.3);
+            border-color: var(--logo-pink-light);
+            box-shadow: 0 0 10px rgba(255, 82, 174, 0.3);
         }
 
         /* MAIN CONTENT GRID */
@@ -125,7 +154,7 @@
         }
 
         .hero-banner {
-            background: linear-gradient(135deg, rgba(255, 0, 127, 0.1), rgba(0, 217, 255, 0.1));
+            background: linear-gradient(135deg, rgba(217, 0, 108, 0.12), rgba(0, 217, 255, 0.08));
             border: 1px solid var(--border-color);
             border-radius: 16px;
             padding: 25px 20px;
@@ -136,12 +165,12 @@
             font-size: 2.5rem;
             font-weight: 900;
             font-style: italic;
-            background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan));
+            background: linear-gradient(90deg, var(--logo-pink-light), var(--accent-cyan));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1.1;
             letter-spacing: 1px;
-            filter: drop-shadow(0 0 15px rgba(255, 0, 127, 0.3));
+            filter: drop-shadow(0 0 15px rgba(217, 0, 108, 0.3));
         }
 
         /* CAJA DEL CHAT LATERAL */
@@ -234,9 +263,9 @@
             height: 0;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-top: 22px solid var(--accent-pink);
+            border-top: 22px solid var(--logo-pink-light);
             z-index: 10;
-            filter: drop-shadow(0 0 8px var(--accent-pink));
+            filter: drop-shadow(0 0 8px var(--logo-pink-light));
         }
 
         canvas {
@@ -250,19 +279,19 @@
             width: 50px;
             height: 50px;
             background: var(--bg-dark);
-            border: 2px solid var(--accent-pink);
+            border: 2px solid var(--logo-pink-light);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-weight: bold;
             font-size: 0.8rem;
-            box-shadow: 0 0 15px rgba(255, 0, 127, 0.5);
+            box-shadow: 0 0 15px rgba(217, 0, 108, 0.5);
             pointer-events: none;
         }
 
         .btn-girar {
-            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            background: linear-gradient(90deg, var(--logo-pink-dark), var(--accent-purple));
             color: white;
             border: none;
             width: 100%;
@@ -272,14 +301,14 @@
             font-weight: bold;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+            box-shadow: 0 0 20px rgba(217, 0, 108, 0.4);
             transition: 0.2s;
             text-transform: uppercase;
         }
 
         .btn-girar:hover {
             transform: scale(1.03);
-            box-shadow: 0 0 30px rgba(255, 0, 127, 0.7);
+            box-shadow: 0 0 30px rgba(217, 0, 108, 0.7);
         }
 
         .last-result-box {
@@ -433,9 +462,9 @@
         }
 
         .tool-card:hover {
-            border-color: var(--accent-pink);
+            border-color: var(--logo-pink-light);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(255, 0, 127, 0.2);
+            box-shadow: 0 5px 15px rgba(217, 0, 108, 0.2);
         }
 
         .tool-icon {
@@ -537,7 +566,8 @@
     <!-- HEADER -->
     <header>
         <div class="logo-container">
-            <h2 style="font-style: italic; letter-spacing: 1px;">FX <span style="color:var(--accent-cyan)">TEAM</span></h2>
+            <img class="header-logo-img" src="favicon.png" alt="Logo FX Team" onerror="this.style.display='none'">
+            <h2 class="brand-title"><span class="fx-white">FX</span> <span class="team-pink">TEAM</span></h2>
         </div>
         <ul class="nav-links">
             <li><a href="#" class="active">🎛️ Herramientas</a></li>
@@ -624,7 +654,7 @@
                 </div>
             </div>
 
-            <button class="btn-girar" id="generate-teams-btn" style="background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple)); width: 100%;">GENERAR EQUIPOS</button>
+            <button class="btn-girar" id="generate-teams-btn" style="background: linear-gradient(90deg, var(--logo-pink-dark), var(--accent-purple)); width: 100%;">GENERAR EQUIPOS</button>
 
             <div class="teams-output-container" id="teams-output"></div>
         </div>
@@ -729,7 +759,7 @@
 
         // --- RULETA ---
         let options = ["Minecraft", "Elegir Mapa", "Valorant", "Descanso", "CS2", "Otro Juego"];
-        const colors = ["#00d9ff", "#ff007f", "#00ffaa", "#8a2be2", "#151a26", "#ffb703"];
+        const colors = ["#00d9ff", "#d9006c", "#00ffaa", "#8a2be2", "#151a26", "#ffb703"];
         const canvas = document.getElementById("wheel");
         const ctx = canvas.getContext("2d");
         const spinBtn = document.getElementById("spin-btn");
@@ -792,7 +822,7 @@
             drawWheel(); document.getElementById("config-modal").style.display = "none";
         };
 
-        // --- CARA O CRUZ (CON ANIMACIÓN CORREGIDA) ---
+        // --- CARA O CRUZ ---
         const coinModal = document.getElementById("modal-coin");
         const coinEl = document.getElementById("coin-element");
         document.getElementById("card-coin").onclick = () => {

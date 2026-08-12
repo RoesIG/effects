@@ -226,6 +226,9 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .panel-sub {
@@ -332,6 +335,14 @@
             font-size: 1rem;
             font-weight: bold;
             color: var(--accent-cyan);
+        }
+
+        .inline-icon {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            vertical-align: middle;
+            filter: drop-shadow(0 0 4px rgba(255, 82, 174, 0.4));
         }
 
         /* CREADOR DE EQUIPOS PANEL */
@@ -616,7 +627,10 @@
         <div class="panel">
             <div class="panel-header">
                 <div class="panel-title-box">
-                    <div class="panel-title">RULETA</div>
+                    <div class="panel-title">
+                        <img class="inline-icon" src="RULETA.png" alt="Ruleta Icon" onerror="this.style.display='none'">
+                        <span>RULETA</span>
+                    </div>
                     <div class="panel-sub">Elige una opción al azar</div>
                 </div>
                 <button class="btn-config" id="open-config-btn">⚙️ Editar opciones</button>
@@ -637,7 +651,9 @@
                     <div class="last-result-title">ÚLTIMO RESULTADO</div>
                     <div class="last-result-value" id="result-display">---</div>
                 </div>
-                <div style="font-size: 1.2rem;">🎲</div>
+                <div>
+                    <img class="inline-icon" src="RULETA.png" alt="Ruleta" onerror="this.outerHTML='🎯'">
+                </div>
             </div>
         </div>
 

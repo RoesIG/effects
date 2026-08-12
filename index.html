@@ -515,7 +515,7 @@
             font-weight: bold;
             color: #000;
             box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
-            transition: transform 1s ease-out;
+            transition: transform 1.2s cubic-bezier(0.4, 0.2, 0.2, 1);
         }
 
         /* ESTILO TIMER */
@@ -792,18 +792,26 @@
             drawWheel(); document.getElementById("config-modal").style.display = "none";
         };
 
-        // --- CARA O CRUZ ---
+        // --- CARA O CRUZ (CON ANIMACIÓN CORREGIDA) ---
         const coinModal = document.getElementById("modal-coin");
         const coinEl = document.getElementById("coin-element");
-        document.getElementById("card-coin").onclick = () => coinModal.style.display = "flex";
+        document.getElementById("card-coin").onclick = () => {
+            coinEl.innerText = "?";
+            coinEl.style.transform = "rotateY(0deg)";
+            coinModal.style.display = "flex";
+        };
+
         document.getElementById("flip-coin-btn").onclick = () => {
-            coinEl.style.transform = "rotateY(720deg)";
-            coinEl.innerText = "???";
+            coinEl.innerText = "?";
+            coinEl.style.transition = "transform 1.2s cubic-bezier(0.4, 0.2, 0.2, 1)";
+            coinEl.style.transform = "rotateY(1440deg)";
+            
             setTimeout(() => {
                 const res = Math.random() < 0.5 ? "CARA" : "CRUZ";
-                coinEl.innerText = res;
+                coinEl.style.transition = "none";
                 coinEl.style.transform = "rotateY(0deg)";
-            }, 600);
+                coinEl.innerText = res;
+            }, 1200);
         };
 
         // --- NÚMERO ALEATORIO ---

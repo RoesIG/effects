@@ -276,18 +276,17 @@
 
         .center-logo-overlay {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 55px;
+            height: 55px;
             background: var(--bg-dark);
             border: 2px solid var(--logo-pink-light);
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            font-size: 0.8rem;
             box-shadow: 0 0 15px rgba(217, 0, 108, 0.5);
             pointer-events: none;
+            overflow: hidden;
         }
 
         .btn-girar {
@@ -617,7 +616,9 @@
             <div class="roulette-wrapper">
                 <div class="roulette-pointer"></div>
                 <canvas id="wheel" width="300" height="300"></canvas>
-                <div class="center-logo-overlay">FX</div>
+                <div class="center-logo-overlay">
+                    <img src="favicon.png" alt="FX" style="width: 70%; height: 70%; object-fit: contain;">
+                </div>
             </div>
 
             <button class="btn-girar" id="spin-btn">GIRAR</button>
@@ -822,7 +823,7 @@
             drawWheel(); document.getElementById("config-modal").style.display = "none";
         };
 
-        // --- CARA O CRUZ ---
+        // --- CARA O CRUZ (CON ANIMACIÓN CORREGIDA) ---
         const coinModal = document.getElementById("modal-coin");
         const coinEl = document.getElementById("coin-element");
         document.getElementById("card-coin").onclick = () => {

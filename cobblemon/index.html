@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Cobblemon Tracker · FX Tools</title>
+  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="cobblemon.css?v=2.5.7">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar-nav">
+    <div class="brand"><img src="../favicon.png" alt="FX" onerror="this.style.display='none'"><div class="brand-copy"><strong>FX TOOLS</strong><span>Cobblemon Tracker · V2.5.7</span></div></div>
+    <div class="nav-group"><div class="nav-label">Principal</div><a class="nav-link" href="../"><span class="nav-icon">⌂</span>Inicio</a><a class="nav-link active" href="./"><span class="nav-icon">◉</span>Cobblemon</a></div>
+    <div class="nav-group"><div class="nav-label">Secciones</div><a class="nav-link" href="#equipo"><span class="nav-icon">♥</span>Equipo</a><a class="nav-link" href="#unusable-section"><span class="nav-icon">×</span>Inutilizables</a><a class="nav-link" href="#analysis-panel"><span class="nav-icon">⌁</span>Análisis</a><a class="nav-link" href="#pokemon-panel"><span class="nav-icon">≡</span>Registro</a><a class="nav-link" href="#regiones"><span class="nav-icon">🏆</span>Regiones</a></div>
+    <div class="sidebar-bottom">Vidas configurables por región.<br>Los Pokémon anteriores quedan bloqueados.</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar cobble-topbar">
+      <div><div class="eyebrow">Cobblemon</div><h1>Tu región, tu equipo, sus vidas.</h1><div class="subtitle">Registra tus Pokémon, controla sus vidas y consulta la progresión de cada región.</div></div>
+      <div class="progress-controls">
+        <label class="compact-field"><span>Región</span><select class="select" id="current-region"><option>Kanto</option><option>Johto</option><option>Hoenn</option><option>Sinnoh</option></select></label>
+        <label class="compact-field"><span>Gimnasio</span><input class="input" id="gym-number" type="number" min="1" max="8" value="1"></label>
+        <button class="btn primary" id="add-pokemon">+ Pokémon</button>
+      </div>
+    </div>
+
+    <div class="cobble-grid">
+      <div class="section-stack">
+        <article class="panel progression-panel" id="progression">
+          <div class="panel-head"><div><div class="panel-title">Progresión regional</div><div class="panel-desc">Estado rápido de la región actual y acceso al siguiente paso.</div></div><span class="badge" id="progress-status-badge">EN CURSO</span></div>
+          <div class="panel-body"><div id="progression-summary" class="progression-summary"></div></div>
+        </article>
+
+        <article class="panel" id="equipo">
+          <div class="panel-head"><div><div class="panel-title">Equipo actual</div><div class="panel-desc">Hasta 6 Pokémon. Ajusta sus vidas rápidamente desde el equipo actual.</div></div><span class="badge live" id="team-count">0 / 6</span></div>
+          <div class="panel-body"><div class="team-grid" id="team-grid"></div></div>
+        </article>
+
+
+        <article class="panel battle-panel" id="battle-panel">
+          <div class="panel-head battle-panel-head"><div><div class="panel-title">Comparador de combate</div><div class="panel-desc">Tu equipo actual frente a un equipo rival temporal. Solo stats base y tipos.</div></div><button class="btn small" id="battle-clear-opponent" type="button">Limpiar rival</button></div>
+          <div class="panel-body">
+            <div class="battle-columns">
+              <section class="battle-side battle-side-own">
+                <div class="battle-side-head"><div><strong>MI EQUIPO</strong><span>Se carga automáticamente desde el equipo actual.</span></div><b id="battle-own-count">0 / 6</b></div>
+                <div class="battle-roster" id="battle-own-team"></div>
+              </section>
+              <section class="battle-side battle-side-rival">
+                <div class="battle-side-head"><div><strong>EQUIPO RIVAL</strong><span>Añade hasta 6 especies para preparar el siguiente combate.</span></div><b id="battle-rival-count">0 / 6</b></div>
+                <div class="battle-rival-search species-search-wrap">
+                  <input class="input" id="battle-opponent-search" autocomplete="off" placeholder="Añadir rival · Ej. Machamp, Lucario…">
+                  <div class="species-results battle-results" id="battle-opponent-results"></div>
+                </div>
+                <div class="battle-roster" id="battle-opponent-team"></div>
+              </section>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel unusable-main" id="unusable-section">
+          <div class="panel-head"><div><div class="panel-title">Pokémon inutilizables</div><div class="panel-desc">Los Pokémon que agoten sus vidas disponibles pasarán directamente a esta sección.</div></div><span class="badge danger-badge"><span id="unusable-count">0</span> fuera</span></div>
+          <div class="panel-body"><div id="unusable-list" class="unusable-list unusable-list-main"></div></div>
+        </article>
+
+        <article class="panel" id="regiones">
+          <div class="panel-head"><div><div class="panel-title">Historial de regiones</div><div class="panel-desc">Tus campeones quedan guardados como historial visual de cada región.</div></div></div>
+          <div class="panel-body"><div id="region-cards" class="region-cards"></div></div>
+        </article>
+      </div>
+
+      <div class="side-stack utility-panels">
+        <details class="panel utility-panel" id="analysis-panel" open>
+          <summary class="utility-summary"><div><span class="utility-icon">⌁</span><div><strong>Análisis del equipo</strong><small>Debilidades repetidas, resistencias y perfil de stats del equipo actual.</small></div></div><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content" id="team-analysis"></div>
+        </details>
+
+        <details class="panel utility-panel" id="overlay-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">▣</span><div><strong>Vista limpia</strong><small>Previsualiza el equipo actual sin elementos adicionales.</small></div></div><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="overlay-preview"><div class="preview-title"><span id="preview-region">HOENN</span><span id="preview-gym">GIMNASIO 1</span></div><div class="preview-team" id="preview-team"></div></div>
+            <button class="btn" id="overlay-popout">Abrir vista limpia</button>
+            <div class="hint">La vista limpia comparte los mismos datos dentro del navegador.</div>
+          </div>
+        </details>
+
+
+        <details class="panel utility-panel" id="type-chart-panel" open>
+          <summary class="utility-summary"><div><span class="utility-icon">◆</span><div><strong>Tabla rápida de tipos</strong><small>Elige un tipo y mira de inmediato a qué gana y contra qué pierde.</small></div></div><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="type-chart-buttons" id="type-chart-buttons"></div>
+            <div class="type-chart-result" id="type-chart-result"></div>
+          </div>
+        </details>
+
+        <details class="panel utility-panel" id="rules-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">≡</span><div><strong id="rules-title">Reglas de Hoenn</strong><small id="rules-subtitle">Consulta rápidamente las reglas de la región.</small></div></div><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content"><div class="rule-list" id="region-rules-list">
+            <div class="rule"><div class="rule-icon">♥</div><div>3 vidas por Pokémon durante toda Hoenn; un KO durante la progresión consume 1.</div></div>
+            <div class="rule"><div class="rule-icon">○</div><div>Fuera de la progresión, los KO no afectan las vidas.</div></div>
+            <div class="rule"><div class="rule-icon">−</div><div>Entre 5 y 7 niveles por debajo del level cap.</div></div>
+            <div class="rule"><div class="rule-icon">EV</div><div>EVs distribuidos por el jugador; IVs solo naturales por captura o crianza.</div></div>
+            <div class="rule"><div class="rule-icon">⚡</div><div>Mega / Z / Dynamax / Tera a elección para sobrevivir.</div></div>
+            <div class="rule"><div class="rule-icon">★</div><div>Legendarios de radar inutilizables salvo 1 elegido por el jugador.</div></div>
+            <div class="rule"><div class="rule-icon">?</div><div>Eficacia de ataques oculta; debilidades e interfaz de ataques rival siguen visibles.</div></div>
+            <div class="rule"><div class="rule-icon">+</div><div>Solo pociones de curación en combate; sin Revivir.</div></div>
+            <div class="rule"><div class="rule-icon">×</div><div>Pokémon usados en Kanto y Johto quedan inutilizables para Hoenn.</div></div>
+          </div></div>
+        </details>
+
+        <details class="panel utility-panel" id="pokemon-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">◫</span><div><strong>Registro de Pokémon</strong><small>Consulta todos los Pokémon registrados, sus stats, vidas y estado.</small></div></div><span class="utility-count" id="series-count">0</span><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="utility-actions"><button class="btn small primary" id="add-pokemon-secondary">+ Añadir Pokémon</button></div>
+            <div class="filters registry-filters">
+              <input class="input" id="poke-search" placeholder="Buscar por nombre o especie…">
+              <select class="select" id="filter-region"><option value="all">Todas las regiones</option><option>Kanto</option><option>Johto</option><option>Hoenn</option><option>Sinnoh</option></select>
+              <select class="select" id="filter-status"><option value="all">Todos los estados</option><option value="team">Equipo actual</option><option value="available">Disponibles ahora</option><option value="unusable">Inutilizables</option><option value="champion">Campeones</option><option value="previous">Regiones anteriores</option></select>
+              <select class="select" id="sort-pokemon"><option value="default">Orden de registro</option><option value="name">Nombre A–Z</option><option value="region">Región</option><option value="bst">Stats totales ↓</option><option value="hp">HP ↓</option><option value="attack">Ataque ↓</option><option value="speed">Velocidad ↓</option><option value="lives">Vidas ↓</option></select>
+            </div>
+            <div class="filters registry-efficacy-filters">
+              <select class="select" id="filter-efficacy"><option value="all">Todas las eficacias</option><option value="strong">Fuerte contra</option><option value="resist">Resiste</option><option value="immune">Inmune</option></select>
+              <select class="select" id="filter-efficacy-type" disabled><option value="all">Elige un tipo</option><option value="normal">Normal</option><option value="fire">Fire</option><option value="water">Water</option><option value="electric">Electric</option><option value="grass">Grass</option><option value="ice">Ice</option><option value="fighting">Fighting</option><option value="poison">Poison</option><option value="ground">Ground</option><option value="flying">Flying</option><option value="psychic">Psychic</option><option value="bug">Bug</option><option value="rock">Rock</option><option value="ghost">Ghost</option><option value="dragon">Dragon</option><option value="dark">Dark</option><option value="steel">Steel</option><option value="fairy">Fairy</option></select>
+              <button class="btn small" id="clear-efficacy-filter" type="button">Limpiar eficacia</button>
+            </div>
+            <div id="pokemon-list" class="pokemon-list compact-series-list"></div>
+          </div>
+        </details>
+
+        <details class="panel utility-panel" id="used-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">⊘</span><div><strong>Pokémon utilizados</strong><small>Registra especies de regiones anteriores para bloquearlas automáticamente.</small></div></div><span class="utility-count" id="used-count">0</span><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="settings-grid">
+              <div class="field"><label>Región de origen</label><select class="select" id="used-region"><option>Kanto</option><option>Johto</option><option>Hoenn</option><option>Sinnoh</option></select></div>
+              <div class="used-summary" id="used-summary"></div>
+            </div>
+            <div class="field used-bulk"><label>Pegar lista</label><textarea class="input textarea" id="used-bulk" rows="7" placeholder="Rhyperior
+Froakie
+Nidoking
+...
+
+También puedes separarlos por comas."></textarea><div class="field-note">Solo hace falta la especie. Los campeones y los Pokémon que registres desde ahora se añaden automáticamente.</div></div>
+            <div class="utility-actions split-actions"><button class="btn small primary" id="add-used-list">Añadir lista</button><button class="btn small" id="clear-used-region">Vaciar región</button></div>
+            <div class="used-chips" id="used-chips"></div>
+          </div>
+        </details>
+
+        <details class="panel utility-panel" id="history-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">↺</span><div><strong>Actividad reciente</strong><small>Últimos cambios importantes realizados en el tracker.</small></div></div><span class="utility-count" id="history-count">0</span><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div id="action-history" class="action-history"></div>
+            <div class="utility-actions history-actions"><button class="btn small" id="clear-history" type="button">Vaciar actividad</button></div>
+          </div>
+        </details>
+
+        <details class="panel utility-panel" id="settings-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">⚙</span><div><strong>Configuración y copia de seguridad</strong><small>Vidas por región y respaldo completo de tus datos.</small></div></div><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="settings-grid">
+              <div class="field"><label>Región</label><select class="select" id="settings-region"><option>Kanto</option><option>Johto</option><option>Hoenn</option><option>Sinnoh</option></select></div>
+              <div class="field"><label>Vidas por Pokémon</label><input class="input" id="region-max-lives" type="number" min="1" max="9" value="3"></div>
+            </div>
+            <div class="hint">El máximo se aplica a esa región completa. Al cambiarlo, ningún Pokémon conservará más vidas que el nuevo máximo.</div>
+            <div class="backup-box"><div><strong>Copia completa</strong><small>Incluye Pokémon, campeones, utilizados, vidas, configuración e imágenes personalizadas.</small></div><div class="backup-actions"><button class="btn small" id="export-cobblemon">Exportar JSON</button><button class="btn small" id="import-cobblemon">Importar JSON</button><input id="import-file" type="file" accept="application/json,.json" hidden></div></div>
+          </div>
+        </details>
+
+        <details class="panel utility-panel source-panel" id="data-panel">
+          <summary class="utility-summary"><div><span class="utility-icon">i</span><div><strong>Datos automáticos</strong><small>Estado de stats, tipos y visuales.</small></div></div><span class="badge live" id="dex-status">Listo</span><span class="utility-chevron">⌄</span></summary>
+          <div class="utility-content">
+            <div class="source-row"><span>Stats / tipos</span><strong>Automático</strong></div>
+            <div class="source-row"><span>Visual</span><strong>Render Cobblemon + fallback</strong></div>
+            <div class="hint">Si una fuente externa cambia o no carga, la tarjeta conserva tus datos y utiliza una imagen alternativa.</div>
+            <div class="visual-review-box"><button class="btn small" id="review-images" type="button">Revisar imágenes</button><span id="image-review-status">Sin revisar</span></div>
+            <div id="image-review-results" class="image-review-results"></div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </main>
+</div>
+
+<dialog class="modal-backdrop native-dialog" id="modal-pokemon">
+  <div class="modal-card pokemon-modal">
+    <div class="modal-head"><div><div class="panel-title" id="poke-modal-title">Añadir Pokémon</div><div class="panel-desc">Busca una especie; FX Tools completa su ficha base.</div></div><button class="btn icon small" id="close-poke">×</button></div>
+    <div class="modal-body">
+      <div class="species-picker">
+        <div class="field"><label>Especie</label><div class="species-search-wrap"><input class="input" id="poke-species-search" autocomplete="off" placeholder="Ej. Wailord, Aggron, Flygon…"><div class="species-results" id="species-results"></div></div><div class="field-note" id="species-note">Escribe al menos 2 letras y selecciona un resultado.</div></div>
+        <div class="selected-species" id="selected-species" tabindex="0"><div class="selected-preview-main"><div class="selected-visual"><span>PKM</span></div><div><strong>Sin especie seleccionada</strong><small>Los stats y tipos aparecerán aquí.</small></div></div></div>
+      </div>
+
+      <div class="modal-grid user-fields">
+        <div class="field"><label>Nombre / apodo</label><input class="input" id="poke-nickname" placeholder="Ej. Aroncito"></div>
+        <div class="field"><label>Región</label><select class="select" id="poke-region"><option>Kanto</option><option>Johto</option><option>Hoenn</option><option>Sinnoh</option></select></div>
+        <div class="field"><label>Habilidad</label><select class="select" id="poke-ability" disabled><option value="">Sin elegir</option></select><div class="field-note" id="ability-note">Selecciona una especie primero.</div></div>
+        <div class="field"><label>Vidas</label><select class="select" id="poke-lives"><option value="3">3 vidas</option><option value="2">2 vidas</option><option value="1">1 vida</option><option value="0">0 · Inutilizable</option></select></div>
+        <div class="field"><label>Nivel · opcional</label><input class="input" id="poke-level" type="number" min="1" max="100" placeholder="—"></div>
+        <div class="full toggle-row"><label class="check-pill"><input type="checkbox" id="poke-team"><span>Equipo actual</span></label><label class="check-pill"><input type="checkbox" id="poke-champion"><span>🏆 Campeón</span></label></div>
+      </div>
+
+      <details class="advanced-details"><summary>Opciones avanzadas</summary><div class="advanced-grid"><div class="field"><label>URL visual personalizada</label><input class="input" id="poke-image" placeholder="Opcional · reemplaza el visual automático"></div><button class="btn small" type="button" id="restore-auto-image">Restaurar visual automático</button></div></details>
+    </div>
+    <div class="modal-actions"><button class="btn danger" id="delete-poke">Eliminar</button><button class="btn" id="cancel-poke">Cancelar</button><button class="btn primary" id="save-poke">Guardar Pokémon</button></div>
+  </div>
+</dialog>
+
+<dialog class="modal-backdrop native-dialog" id="modal-stats">
+  <div class="modal-card stats-modal-card">
+    <div class="modal-head stats-modal-head">
+      <div>
+        <div class="panel-title">Stats base</div>
+        <div class="panel-desc">Consulta rápida del Pokémon seleccionado.</div>
+      </div>
+      <button class="btn icon small" id="close-stats" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <div class="stats-modal-body" id="stats-modal-body"></div>
+    <div class="stats-modal-nav" id="stats-modal-nav">
+      <button class="btn small" id="stats-prev" type="button">← Anterior</button>
+      <span id="stats-position">—</span>
+      <button class="btn small" id="stats-next" type="button">Siguiente →</button>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal-backdrop native-dialog" id="modal-evolution">
+  <div class="modal-card evolution-modal-card">
+    <div class="modal-head"><div><div class="panel-title">Evolucionar Pokémon</div><div class="panel-desc" id="evolution-description">Selecciona la evolución.</div></div><button class="btn icon small" id="close-evolution" type="button" aria-label="Cerrar">×</button></div>
+    <div class="modal-body">
+      <div class="evolution-note"><strong>Mismo Pokémon, nueva especie.</strong><span>Conserva apodo, vidas, región, posición del equipo, campeón e historial. La especie anterior y la nueva quedan registradas como utilizadas.</span></div>
+      <div id="evolution-list" class="evolution-list"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal-backdrop native-dialog" id="modal-compare">
+  <div class="modal-card compare-modal-card">
+    <div class="modal-head"><div><div class="panel-title">Comparar Pokémon</div><div class="panel-desc">Stats base, tipos y eficacias lado a lado.</div></div><button class="btn icon small" id="close-compare" type="button" aria-label="Cerrar">×</button></div>
+    <div class="modal-body compare-picker">
+      <div class="compare-picker-grid">
+        <div class="field"><label>Pokémon registrado</label><select class="select" id="compare-registered"><option value="">Elegir registrado…</option></select></div>
+        <div class="field"><label>O buscar cualquier especie</label><div class="species-search-wrap"><input class="input" id="compare-search" autocomplete="off" placeholder="Ej. Flygon, Aggron, Gardevoir…"><div class="species-results" id="compare-results"></div></div></div>
+      </div>
+      <div id="compare-body"></div>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal-backdrop native-dialog" id="modal-replace">
+  <div class="modal-card replace-modal-card">
+    <div class="modal-head"><div><div class="panel-title">Cambiar Pokémon del equipo</div><div class="panel-desc" id="replace-description">Elige un Pokémon disponible de la región actual.</div></div><button class="btn icon small" id="close-replace" type="button">×</button></div>
+    <div class="modal-body">
+      <input class="input" id="replace-search" placeholder="Buscar Pokémon disponible…">
+      <div id="replace-list" class="replace-list"></div>
+    </div>
+  </div>
+</dialog>
+
+<div class="toast-wrap" id="cobble-toast-wrap"></div>
+
+<script src="../js/storage.js"></script><script src="cobblemon.js?v=2.5.7"></script>
+</body>
+</html>

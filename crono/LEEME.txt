@@ -1,0 +1,8 @@
+Crono Hardcore es una sección independiente de FX Tools.
+Archivos propios: crono/index.html, crono.css, manzana.js, assets/.
+El avatar fijo se guarda en crono/assets/roesig-avatar.png.
+La textura 16×16 de la manzana dorada se reconstruyó desde la tabla de referencia proporcionada.
+Puesto 3 registrado: RoesIG / Ultra Hardcore / 1:24:38 / 1/1.
+Puestos 1 y 2 permanecen ocultos. No hay enlaces a vídeos hasta que se proporcionen.
+El antiguo museo/crono.html redirige a esta ruta por compatibilidad.
+No se han modificado los archivos JavaScript o CSS de otras herramientas.

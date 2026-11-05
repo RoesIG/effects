@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070910">
+  <title>Crono Hardcore · FX Tools</title>
+  <link rel="icon" href="../favicon.png">
+  <link rel="stylesheet" href="../css/global.css">
+  <link rel="stylesheet" href="crono.css">
+  <script src="manzana.js" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar-nav">
+    <div class="brand"><img src="../favicon.png" alt="FX" onerror="this.style.display='none'"><div class="brand-copy"><strong>FX TOOLS</strong><span>Crono Hardcore · V3.0.0</span></div></div>
+    <div class="nav-group"><div class="nav-label">Principal</div><a class="nav-link" href="../"><span class="nav-icon">⌂</span>Inicio</a><a class="nav-link" href="../skin-editor/"><span class="nav-icon">◈</span>Editor de skins</a><a class="nav-link active" href="./" aria-current="page"><span class="nav-icon">◷</span>Crono Hardcore</a><a class="nav-link" href="../museo/"><span class="nav-icon">◇</span>Museo</a></div>
+    <div class="sidebar-bottom">Crono Hardcore · Clasificación</div>
+  </aside>
+  <main class="main crono-main">
+    <header class="crono-header">
+      <div class="crono-header-copy"><span class="crono-kicker">FX TOOLS / RETOS</span><h1>Crono <span>Hardcore.</span></h1></div>
+      <div class="crono-header-clock" aria-hidden="true"><span>◷</span><small>CRONO<br>HARDCORE</small></div>
+    </header>
+    <section class="ranking" aria-labelledby="ranking-title">
+      <div class="ranking-heading"><div><h2 id="ranking-title">Clasificación</h2></div><span class="ranking-count">01 RESULTADO REGISTRADO</span></div>
+      <div class="ranking-table">
+        <div class="rank-columns" aria-hidden="true"><span>PUESTO</span><span>JUGADOR</span><span>TIEMPO</span><span>INTENTOS</span><span>RETO</span></div>
+        <div class="rank-row rank-locked" aria-label="Puesto 1, todavía no publicado">
+          <span class="rank-position first">1<span class="rank-dot">.</span></span>
+          <div class="rank-player"><div class="rank-placeholder-avatar" aria-hidden="true"><span></span></div><div class="rank-player-copy"><strong>Por revelar</strong><small>Vídeo pendiente</small></div></div>
+          <span class="rank-number">--:--:--</span><span class="rank-number">-/-</span>
+          <div class="rank-locked-item"><span class="rank-hexagon" aria-hidden="true"></span></div>
+        </div>
+        <div class="rank-row rank-locked" aria-label="Puesto 2, todavía no publicado">
+          <span class="rank-position second">2<span class="rank-dot">.</span></span>
+          <div class="rank-player"><div class="rank-placeholder-avatar smaller" aria-hidden="true"><span></span></div><div class="rank-player-copy"><strong>Por revelar</strong><small>Vídeo pendiente</small></div></div>
+          <span class="rank-number">--:--:--</span><span class="rank-number">-/-</span>
+          <div class="rank-locked-item"><span class="rank-armor" aria-hidden="true">◆</span></div>
+        </div>
+        <div class="rank-row rank-published" aria-label="Puesto 3, jugador RoesIG, 1 hora 24 minutos y 38 segundos, intento 1 de 1, Ultra Hardcore">
+          <span class="rank-position third">3<span class="rank-dot">.</span></span>
+          <div class="rank-player"><img class="rank-avatar" src="assets/roesig-avatar.png" alt="Busto de Minecraft de RoesIG" width="112" height="112"><div class="rank-player-copy"><strong>RoesIG</strong></div></div>
+          <span class="rank-number rank-final-time">1:24:38</span><span class="rank-number rank-final-attempts">1/1</span>
+          <div class="rank-challenge"><div class="apple-control" tabindex="0" role="group" aria-label="Manzana dorada 3D, reto Ultra Hardcore. Arrastra para girarla o utiliza las flechas del teclado" title="Ultra Hardcore"><img class="apple-fallback" src="assets/manzana-dorada.png" alt="Manzana dorada"><canvas id="apple-canvas" width="192" height="192" aria-hidden="true"></canvas><span class="apple-tooltip">Ultra Hardcore</span></div></div>
+        </div>
+      </div>
+      <p class="ranking-note">Los puestos 1 y 2 permanecerán ocultos hasta la publicación de sus vídeos.</p>
+    </section>
+  </main>
+</div>
+</body>
+</html>

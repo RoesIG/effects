@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<symbol id="home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zM9 21v-8h6v8"/></symbol>
+<symbol id="skin" viewBox="0 0 24 24"><path d="m8 3 4 2 4-2 5 5-3 4-2-2v11H8V10l-2 2-3-4zM10 7h4"/></symbol>
+<symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="museum" viewBox="0 0 24 24"><path d="m3 9 9-6 9 6M4 10h16M5 20h14M3 22h18M7 10v10M12 10v10M17 10v10"/></symbol>
+<symbol id="circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6m6 0h6"/></symbol>
+<symbol id="star" viewBox="0 0 24 24"><path d="m12 2 3.1 6.3L22 9.3l-5 4.8 1.2 6.9-6.2-3.3-6.2 3.3L7 14.1l-5-4.8 6.9-1z"/></symbol>
+<symbol id="diamond" viewBox="0 0 24 24"><path d="m12 2 9 10-9 10L3 12zM12 2v20M3 12h18"/></symbol>
+<symbol id="crown" viewBox="0 0 24 24"><path d="M3 8l5 4 4-7 4 7 5-4-2 12H5L3 8zM6 17h12"/></symbol>
+</svg>

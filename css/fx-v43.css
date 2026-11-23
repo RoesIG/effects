@@ -1,0 +1,77 @@
+/* FX Tools 4.3 — functional shell refinements. Original photos, logos and animations retained.
+   The only 3D assets authored here are the explicitly requested neutral die and coin. */
+body.fx-unified.fx-home .stage-index{display:none!important}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette)>.stage-header{align-self:center}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .stage-header h2{margin:0;font-size:clamp(2.45rem,4.05vw,4.8rem);line-height:1.02;letter-spacing:-.065em;text-wrap:balance}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .stage-header{border:0;display:block;min-width:0}
+body.fx-unified.fx-home #stage-roulette .stage-header h2{margin:0}
+body.fx-unified.fx-home .stage-hint{display:none!important}
+/* The inactive screens don't reserve space for explanatory counters. */
+body.fx-unified.fx-home .random-scene,body.fx-unified.fx-home .coin-scene{gap:12px}
+/* A common presentation size, regardless of whether the piece is a wheel, coin or die. */
+body.fx-unified.fx-home .fx-coin-perspective,body.fx-unified.fx-home .fx-die-stage{--fx-hero-size:clamp(250px,min(36vw,52svh),460px);position:relative;flex:0 0 auto;width:var(--fx-hero-size);height:var(--fx-hero-size);margin:0 auto;display:grid;place-items:center;perspective:1200px}
+/* COIN: layered metallic cylinder edges, real front and back with separate neutral labels. */
+body.fx-unified.fx-home .fx-coin-perspective{--coin-size:clamp(205px,min(29vw,38svh),335px);background:none;border:0;box-shadow:none;filter:none}
+body.fx-unified.fx-home .fx-coin-perspective::before{content:"";position:absolute;width:94%;height:94%;border-radius:50%;background:radial-gradient(circle,#b657832b,transparent 71%);pointer-events:none}
+body.fx-unified.fx-home .fx-coin-object{position:relative;width:var(--coin-size);height:var(--coin-size);border:0;border-radius:0;background:none;box-shadow:none;transform-style:preserve-3d;transform:rotateX(12deg) rotateY(0deg);will-change:transform;backface-visibility:visible;--coin-end:1080deg}
+body.fx-unified.fx-home .fx-coin-face{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:7px solid #cba2ad;background:radial-gradient(circle at 32% 28%,#54404b 0%,#352833 42%,#211922 76%,#150f18 100%);box-shadow:inset 0 0 0 5px #735361,inset 0 0 0 8px #d9a3b8,inset 0 0 0 17px #2e202c,0 0 0 1px #efc0cb;transform:translateZ(12px)}
+body.fx-unified.fx-home .fx-coin-face span{display:grid;place-items:center;width:65%;height:65%;border:1px solid #b97f98;border-radius:50%;font-size:clamp(1.4rem,2.6vw,2.7rem);font-weight:850;letter-spacing:.07em;color:#f3d6e4;text-shadow:0 2px 12px #10050e}
+body.fx-unified.fx-home .fx-coin-back{transform:rotateY(180deg) translateZ(12px);background:radial-gradient(circle at 30% 25%,#594550,#322431 59%,#160f19 100%)}
+body.fx-unified.fx-home .fx-coin-edge{position:absolute;inset:0;border-radius:50%;transform-style:preserve-3d;box-shadow:inset 0 0 0 7px #cda9b4}
+body.fx-unified.fx-home .fx-coin-edge i{position:absolute;inset:0;display:block;border-radius:50%;border:4px solid #8e6879;box-shadow:inset 0 0 0 1px #d1a7af;backface-visibility:visible}
+body.fx-unified.fx-home .fx-coin-edge i:nth-child(even){border-color:#d5a5b4}
+body.fx-unified.fx-home .fx-coin-edge i:nth-child(3n){border-color:#573d4c}
+body.fx-unified.fx-home .fx-coin-object.is-flipping{animation:fx-coin-throw 1850ms cubic-bezier(.2,.77,.26,1) both}
+@keyframes fx-coin-throw{0%{transform:translateY(4px) rotateX(12deg) rotateY(0deg)}23%{transform:translateY(-70px) rotateX(24deg) rotateY(365deg)}51%{transform:translateY(-115px) rotateX(5deg) rotateY(760deg)}77%{transform:translateY(-25px) rotateX(0deg) rotateY(calc(var(--coin-end) - 65deg))}88%{transform:translateY(7px) rotateX(0deg) rotateY(calc(var(--coin-end) + 8deg))}95%{transform:translateY(-5px) rotateX(0deg) rotateY(calc(var(--coin-end) - 4deg))}100%{transform:translateY(0px) rotateX(0deg) rotateY(var(--coin-end))}}
+body.fx-unified.fx-home .fx-coin-shadow,body.fx-unified.fx-home .fx-die-shadow{position:absolute;left:24%;right:24%;height:21px;bottom:7%;border-radius:50%;background:#0009;box-shadow:0 0 40px 18px #af4f8324;filter:blur(10px);pointer-events:none;transform:scale(.95)}
+body.fx-unified.fx-home .coin-scene .scene-under{margin-top:0;position:relative;z-index:2}
+body.fx-unified.fx-home .coin-scene .small-label{min-height:24px;text-align:center;font-size:.8rem;letter-spacing:.075em}
+/* DICE: CSS-only six-sided cube, screens on every face, generated result shown on the FRONT display. */
+body.fx-unified.fx-home .fx-die-stage{--die-size:clamp(188px,min(18vw,28svh),246px)}
+body.fx-unified.fx-home .fx-die-tilt{width:var(--die-size);height:var(--die-size);transform:rotateX(-14deg) rotateY(-20deg);transform-style:preserve-3d;perspective:1100px}
+body.fx-unified.fx-home .fx-die{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateX(0deg) rotateY(0deg);will-change:transform}
+body.fx-unified.fx-home .fx-die.is-rolling{animation:fx-die-roll 1750ms cubic-bezier(.25,.75,.24,1) both}
+body.fx-unified.fx-home .fx-die-face{--half:calc(var(--die-size) / 2);position:absolute;inset:0;display:grid;place-items:center;border:4px solid #a16d8b;border-radius:20px;background:linear-gradient(145deg,#544055 0%,#251d2b 38%,#150e1b 100%);box-shadow:inset 0 0 0 7px #241724,inset 0 0 0 10px #6a415c,0 0 30px #c0658a15;backface-visibility:visible;-webkit-backface-visibility:visible}
+body.fx-unified.fx-home .fx-die-front{transform:translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-back{transform:rotateY(180deg) translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-right{transform:rotateY(90deg) translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-left{transform:rotateY(-90deg) translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-top{transform:rotateX(90deg) translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-bottom{transform:rotateX(-90deg) translateZ(var(--half))}
+body.fx-unified.fx-home .fx-die-screen{display:flex;align-items:center;justify-content:center;width:77%;height:70%;padding:5px;overflow:hidden;border:3px solid #8b6a81;border-radius:13px;background:linear-gradient(155deg,#18131f,#090d15);box-shadow:0 0 16px #100914,inset 0 0 24px #a76d7a14,0 0 0 5px #201822;color:#f9d5e7;text-shadow:0 0 14px #d68bad59;font-size:var(--fx-die-font,clamp(2rem,4vw,4.3rem));font-weight:880;letter-spacing:-.035em;white-space:nowrap;line-height:1}
+body.fx-unified.fx-home .fx-die-face:not(.fx-die-front) .fx-die-screen{font-size:3.5rem;opacity:.5}
+@keyframes fx-die-roll{0%{transform:translateY(8px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)}22%{transform:translateY(-70px) rotateX(235deg) rotateY(170deg) rotateZ(-14deg)}49%{transform:translateY(-98px) rotateX(515deg) rotateY(455deg) rotateZ(8deg)}74%{transform:translateY(-25px) rotateX(683deg) rotateY(684deg) rotateZ(-5deg)}88%{transform:translateY(7px) rotateX(722deg) rotateY(718deg) rotateZ(1deg)}94%{transform:translateY(-7px) rotateX(718deg) rotateY(722deg) rotateZ(-1deg)}100%{transform:translateY(0px) rotateX(720deg) rotateY(720deg) rotateZ(0deg)}}
+body.fx-unified.fx-home .random-result{display:none}
+body.fx-unified.fx-home .fx-die-stage{--fx-hero-size:clamp(300px,min(35vw,44svh),410px)}
+body.fx-unified.fx-home .random-controls{max-width:410px;width:min(100%,410px);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+body.fx-unified.fx-home #stage-random .action-btn{min-width:185px}
+/* Empty editor textures and charcoal-pink workbench rather than blue backgrounds. */
+body.fx-unified.fx-sections .editor-main{--border:#594252;--border-strong:#745166;background:#100d13;color:#efe7ee}
+body.fx-unified.fx-sections .editor-main .stage{background:radial-gradient(circle at 50% 45%,#3b2b3a,#241923 65%,#171019)!important;border-color:#4d3548!important}
+body.fx-unified.fx-sections .editor-main :is(.workbench,.inspector,.inspector-card,.tool-rail,.workbar,.bottom-dock){background-color:#141017!important;border-color:#493643!important}
+body.fx-unified.fx-sections .editor-main :is(.field-input,.mid-gradient,.eyedrop-options,.mini-btn,.layer,.shape-menu,.fx-color-picker,.paint-modes,.rail-color-panel,.select-note,.tool-btn,.inspector-card .section-heading,.stage-help-toggle){background-color:#211922!important;border-color:#4e3a4b!important}
+body.fx-unified.fx-sections .editor-main .inspector-card{background:#171219!important}
+body.fx-unified.fx-sections .editor-main :is(.field-input,.mini-btn,.layer,.tool-btn,.stage-indicator){color:#e8dce6!important}
+body.fx-unified.fx-sections .editor-main .mid-gradient{background:#261c28!important}
+body.fx-unified.fx-sections .editor-main .stage .stage-tag,body.fx-unified.fx-sections .editor-main .stage .stage-hint{background:#221821!important;color:#e5d2e1!important}
+/* Stable centered player slot on the Crono table; same avatar size for solo/duo. */
+body.fx-unified.fx-sections .rank-participants{justify-content:center;min-width:0}
+body.fx-unified.fx-sections .rank-participants[data-participant-count="1"]{gap:0}
+body.fx-unified.fx-sections .rank-participants[data-participant-count="1"] .rank-member{flex-direction:column;text-align:center;gap:4px}
+body.fx-unified.fx-sections .rank-participants[data-participant-count="2"] .rank-member{align-items:center;text-align:center}
+@media(max-width:690px){
+ body.fx-unified.fx-home .fx-coin-perspective,body.fx-unified.fx-home .fx-die-stage{--fx-hero-size:min(78vw,350px);}
+ body.fx-unified.fx-home .fx-coin-perspective{--coin-size:min(63vw,275px)}
+ body.fx-unified.fx-home .fx-die-stage{--die-size:min(53vw,210px)}
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .stage-header h2{font-size:clamp(2.4rem,10vw,4rem)}
+ body.fx-unified.fx-home .fx-die-screen{font-size:var(--fx-die-font,2.5rem)}
+ body.fx-unified.fx-home .random-controls{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){body.fx-unified.fx-home .fx-coin-object.is-flipping,body.fx-unified.fx-home .fx-die.is-rolling{animation-duration:.01ms!important}}
+.fx-visually-hidden{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip-path:inset(50%)!important;white-space:nowrap!important}
+/* Earlier mobile rules hid all tab names. The app dock must remain readable even
+   when the user's custom icon PNGs have not yet been copied to this package. */
+@media(max-width:690px){
+ body.fx-unified.fx-home .stage-nav .stage-tab>span:last-child{display:block!important;text-align:center;white-space:normal;font-size:9px;line-height:1.15}
+ body.fx-unified.fx-home .stage-nav .stage-tab{gap:5px;padding:8px 1px}
+}

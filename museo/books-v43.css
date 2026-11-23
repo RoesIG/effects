@@ -1,0 +1,120 @@
+/* Museum v4.3 — CSS-only book spines; no logos, external art or fabricated images. */
+body.fx-unified.fx-sections .fx-site-header .fx-top-room-title{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;max-width:26%;overflow:hidden;text-overflow:ellipsis;color:#f3e8ee;font-size:clamp(1.1rem,1.7vw,1.6rem);line-height:1;font-weight:750;letter-spacing:-.045em;pointer-events:none;margin:0}
+body.fx-unified.fx-sections .fx-primary-nav{margin-left:auto}
+body.fx-unified.fx-sections .fx-books-main{padding:clamp(26px,5vh,62px) clamp(22px,5vw,92px) 75px;min-height:calc(100svh - 84px);background:#0d0b10}
+.fx-book-collection{display:flex;flex-direction:column;gap:12px;max-width:1330px;margin:0 auto;perspective:1600px;padding:12px 5px 28px}
+.fx-museum-book{--book-cover:#31212c;--book-edge:#a66d8c;display:block;position:relative;height:clamp(115px,17vh,161px);padding:0 15px 10px 0;flex:0 0 auto;text-decoration:none;color:#f2e9ed;outline-offset:4px;transform-style:preserve-3d;transition:transform 340ms cubic-bezier(.17,.76,.19,1),filter .34s ease;cursor:pointer}
+.fx-museum-book:before{content:"";position:absolute;inset:0 15px 0 0;background:linear-gradient(180deg,#f3d9e923,#100b12 4%,transparent 13%,transparent 87%,#100912 96%,#875b72 100%),var(--book-cover);border:1px solid var(--book-edge);border-radius:5px 11px 12px 5px;box-shadow:inset 9px 0 0 #1a121b,inset 13px 0 0 #b487a54d,inset 0 -10px 15px #0503056b,0 11px 0 -5px #5c4050,0 19px 15px -11px #000a;pointer-events:none}
+.fx-museum-book:after{content:"";position:absolute;inset:auto 8px 0 24px;height:10px;border-radius:0 0 7px 4px;background:repeating-linear-gradient(0deg,#ab9a93,#d6bfc0 1px,#554250 2px,#574553 3px);box-shadow:0 4px 5px #0007;opacity:.27;pointer-events:none}
+.fx-museum-book:hover,.fx-museum-book:focus-visible{transform:translateX(12px) translateY(-2px);filter:brightness(1.15)}
+.fx-museum-book:active{transform:translateX(18px)}
+.fx-book-spine{position:relative;z-index:1;height:100%;width:100%;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(28px,4vw,70px);gap:24px}
+.fx-book-title{font-size:clamp(1.5rem,2.6vw,2.65rem);font-weight:760;letter-spacing:-.045em;text-shadow:0 2px 14px #000b;line-height:1.12;max-width:65%}
+.fx-book-animation{flex:0 0 clamp(120px,16vw,240px);width:clamp(120px,16vw,240px);height:clamp(75px,11vh,110px);display:grid;place-items:center;position:relative;pointer-events:none}
+.fx-book-champions{--book-cover:#281b25;--book-edge:#92617e}
+.fx-book-club{--book-cover:#261e2b;--book-edge:#685569}
+.fx-book-legends{--book-cover:#302029;--book-edge:#987283}
+.fx-book-archive{--book-cover:#27211d;--book-edge:#65503e;height:clamp(123px,18vh,170px)}
+.fx-book-archive:before{border:2px solid #76614c;background:linear-gradient(180deg,#b39b7721,#1a120d 12%,#372b24 58%,#1b1511 100%);box-shadow:inset 12px 0 0 #160f0d,inset 16px 0 0 #8c6c4a38,inset 0 0 0 6px #b28c5030,0 11px 0 -5px #5f4b39,0 18px 16px -11px #000a}
+.fx-book-archive .fx-book-spine{justify-content:center;text-align:center}
+.fx-book-archive .fx-book-title{max-width:none;color:#e8d3ab;letter-spacing:.012em;font-weight:690;font-family:Georgia,serif}
+/* A single solid CSS-only club disc with true 3D thickness (not two rings).
+   Its surfaces can later accept the two user-created Affinity designs. */
+.fx-book-medal{perspective:700px}
+.fx-book-medal-rotor{position:relative;width:76px;height:76px;transform-style:preserve-3d;animation:fx-book-spin 22s linear infinite}
+.fx-book-medal-face{position:absolute;inset:0;border-radius:50%;border:3px solid #b78c9f;
+  background:radial-gradient(circle at 34% 26%,#65495c 0%,#3c2b3b 56%,#211924 100%);
+  box-shadow:inset 0 0 0 4px #715265,inset 0 0 15px #100a14,0 0 0 1px #382330;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.fx-book-medal-face.front{transform:translateZ(7px)}
+.fx-book-medal-face.back{transform:rotateY(180deg) translateZ(7px)}
+.fx-book-medal-edge{position:absolute;inset:0;border:0!important;border-radius:50%;
+  background:#654558;transform:translateZ(0);transform-style:preserve-3d}
+.fx-book-medal-rib{position:absolute;top:50%;left:50%;width:5.6px;height:14px;margin:-7px 0 0 -2.8px;
+  transform:rotateZ(var(--rib-angle)) translateY(-34px) rotateX(90deg);
+  background:linear-gradient(180deg,#a98092,#765166 32%,#4b3042 60%,#99718a);
+  backface-visibility:visible;box-shadow:inset 0 0 1px #211321}
+@keyframes fx-book-spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+/* Fixed tree branches — only a slow, gentle change in their illumination. */
+.fx-book-tree{animation:fx-tree-breathe 10s ease-in-out infinite;filter:brightness(.85)}
+.fx-book-tree .fx-tree-node{position:absolute;width:34px;height:18px;border:1px solid #9a7c90;
+  border-radius:4px;background:#3b2c3a;animation:none!important;opacity:1}
+.fx-book-tree .fx-tree-node.root{top:7%;left:calc(50% - 17px)}
+.fx-book-tree .fx-tree-node.child{bottom:7%}
+.fx-book-tree .fx-tree-node.one{left:14%}
+.fx-book-tree .fx-tree-node.two{left:calc(50% - 17px)}
+.fx-book-tree .fx-tree-node.three{right:14%}
+.fx-book-tree .fx-tree-branch{position:absolute;animation:none!important;opacity:1;box-shadow:none!important;background:#94788a}
+.fx-book-tree .fx-tree-branch.trunk{width:2px;height:calc(41% - 18px);top:calc(7% + 18px);left:calc(50% - 1px)}
+.fx-book-tree .fx-tree-branch.left{height:2px;width:calc(72% - 34px);top:48%;left:calc(14% + 17px)}
+.fx-book-tree .fx-tree-branch.right{height:calc(45% - 18px);top:48%;left:calc(14% + 17px);width:calc(72% - 34px);
+  background:linear-gradient(#94788a,#94788a) left top / 2px 100% no-repeat,
+             linear-gradient(#94788a,#94788a) center top / 2px 100% no-repeat,
+             linear-gradient(#94788a,#94788a) right top / 2px 100% no-repeat}
+@keyframes fx-tree-breathe{
+  0%,100%{filter:brightness(.78) drop-shadow(0 0 0 transparent)}
+  50%{filter:brightness(1.16) drop-shadow(0 0 2px #a57491aa)}
+}
+/* Silhouette-only automatically traversing portrait cards, no actual images. */
+/* Repeating blank-card belt: 4 cards are duplicated once, so the -224px
+   end position exactly matches the beginning. No hidden/flash frame. */
+.fx-book-cards{display:block;overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);border-radius:4px;}
+.fx-book-cards-track{position:absolute;left:0;top:0;height:100%;display:flex;align-items:center;gap:12px;width:max-content;animation:fx44-cards-belt 30s linear infinite;will-change:transform;}
+.fx-book-cards-track>span{position:relative;flex:0 0 44px;width:44px;height:76%;border:2px solid #b28098;border-radius:5px;background:linear-gradient(#342a38,#17121b);box-shadow:inset 0 0 0 5px #1c1421;}
+.fx-book-cards-track>span:nth-child(4n+2){background:linear-gradient(#422d3c,#19131d);border-color:#9f748a;}
+.fx-book-cards-track>span:nth-child(4n+3){background:linear-gradient(#2d2533,#15111b);border-color:#805b79;}
+.fx-book-cards-track>span:nth-child(4n+4){background:linear-gradient(#382839,#1c141e);border-color:#ad7994;}
+@keyframes fx44-cards-belt{from{transform:translate3d(0,0,0)}to{transform:translate3d(-224px,0,0)}}
+/* Room screens. Remove duplicate oversized headings, maintain original interactive components. */
+body.fx-unified.fx-sections :is(.museum-main,.museum-v3-main):not(.fx-books-main){padding:10px clamp(16px,2.6vw,45px) 24px}
+body.fx-unified.fx-sections :is(.museum-back,.museum-v3-back){display:inline-flex;align-items:center;margin:2px 0 8px;font-size:.74rem;min-height:28px;letter-spacing:0;color:#d0a7bf}
+body.fx-unified.fx-sections :is(.legend-hero,.coin-gallery-header){display:none!important}
+body.fx-unified.fx-sections .legend-carousel-section{margin-top:4px}
+body.fx-unified.fx-sections .legend-carousel{padding-top:12px;padding-bottom:12px}
+body.fx-unified.fx-sections .coin-region-tabs{margin:2px 0 9px;gap:9px}
+body.fx-unified.fx-sections .coin-region-tabs button{padding:9px 14px;min-height:43px}
+body.fx-unified.fx-sections .coin-gallery-layout{min-height:0;grid-template-columns:minmax(0,1.75fr) minmax(230px,.8fr)}
+body.fx-unified.fx-sections .coin-gallery-feature{min-height:0}
+body.fx-unified.fx-sections .coin-gallery-topline{padding:15px 19px 0}
+body.fx-unified.fx-sections .coin-gallery-topline h2{font-size:1.5rem}
+body.fx-unified.fx-sections .coin-focus-grid{min-height:min(360px,40vh);padding-top:0}
+body.fx-unified.fx-sections .coin-focus-display{min-height:min(345px,38vh);padding-bottom:12px}
+body.fx-unified.fx-sections .coin-focus-meta h3{font-size:clamp(2.35rem,3.7vw,3.8rem)}
+body.fx-unified.fx-sections .coin-focus-label{margin-top:6px}
+body.fx-unified.fx-sections .coin-focus-divider{margin-top:13px}
+body.fx-unified.fx-sections .coin-focus-controls{padding:3px 12px 7px}
+body.fx-unified.fx-sections .coin-focus-hint{display:none}
+body.fx-unified.fx-sections .coin-gallery-collection{padding:15px}
+body.fx-unified.fx-sections .coin-mini-grid{margin-top:10px;gap:7px}
+body.fx-unified.fx-sections .coin-mini-item{padding:7px 3px}
+body.fx-unified.fx-sections .club-tree{margin-top:3px}
+body.fx-unified.fx-sections .club-tree-head{padding:0 4px 7px}
+body.fx-unified.fx-sections .club-tree-stage{min-height:0;padding:18px 18px 22px;background:#110e14}
+body.fx-unified.fx-sections .tree-trunk{height:17px}
+body.fx-unified.fx-sections .tree-level{gap:13px}
+body.fx-unified.fx-sections .tree-level:not(.tree-level-founder):before{top:-10px;background:linear-gradient(90deg,transparent,#926f85 10%,#926f85 90%,transparent)}
+body.fx-unified.fx-sections .tree-level:not(.tree-level-founder) .member-node:before{top:-10px;height:10px;background:#926f85}
+body.fx-unified.fx-sections .member-node:not(.founder-node){border-color:#5c4355;background:linear-gradient(140deg,#2e222e,#1a141e)}
+body.fx-unified.fx-sections .member-node.core-node{background:linear-gradient(140deg,#3b2938,#241a28);border-color:#76536c}
+body.fx-unified.fx-sections .member-node:not(.founder-node) .member-avatar{background:#392735;border-color:#795569;color:#e5bfd4}
+body.fx-unified.fx-sections .member-node:not(.founder-node) .member-info span{color:#bb91ab}
+body.fx-unified.fx-sections .member-node.member-node-low{background:linear-gradient(140deg,#291e2a,#17121c)}
+body.fx-unified.fx-sections .member-weight{display:none}
+/* Responsive: preserve all records; scrolling allowed when content truly cannot fit. */
+@media(max-width:1280px){body.fx-unified.fx-sections .coin-gallery-layout{grid-template-columns:1fr}body.fx-unified.fx-sections .coin-gallery-collection{padding:15px}body.fx-unified.fx-sections .coin-mini-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+@media(max-width:1100px){body.fx-unified.fx-sections .fx-site-header .fx-top-room-title{top:auto;bottom:-42px;transform:translateX(-50%);max-width:80%;background:#171019;padding:9px 20px;border-radius:0 0 8px 8px;font-size:1.03rem}body.fx-unified.fx-sections :is(.museum-main,.museum-v3-main):not(.fx-books-main){padding-top:45px}body.fx-unified.fx-sections .fx-books-main{padding-top:62px}}
+@media(max-width:730px){.fx-book-spine{padding:0 25px}.fx-book-animation{flex-basis:105px;width:105px}.fx-book-title{font-size:clamp(1.35rem,4.5vw,2rem)}.fx-museum-book{height:115px}.fx-book-archive{height:125px}body.fx-unified.fx-sections .coin-gallery-layout{grid-template-columns:1fr}body.fx-unified.fx-sections .coin-mini-grid{grid-template-columns:repeat(3,minmax(0,1fr))}body.fx-unified.fx-sections .club-tree-stage{overflow-x:auto;padding:18px 10px}body.fx-unified.fx-sections .club-tree-stage .tree-level{min-width:590px}}
+@media(max-width:490px){.fx-book-animation{flex-basis:88px;width:88px;transform:scale(.8);transform-origin:right center}.fx-book-title{max-width:75%}.fx-book-archive .fx-book-title{font-size:1.45rem}}
+@media(prefers-reduced-motion:reduce){.fx-book-medal-rotor,.fx-book-tree *, .fx-book-cards-track{animation:none!important}.fx-museum-book{transition:none!important}}
+/* Overlay created by books-v43.js. Kept entirely in CSS (no canvas snapshot / image). */
+.fx-museum-transition{position:fixed;z-index:9999;inset:0;pointer-events:none;perspective:1700px;overflow:hidden}
+.fx-museum-transition-piece{position:absolute;box-sizing:border-box;display:grid;place-items:center;transform-style:preserve-3d;overflow:hidden;border-radius:8px;border:2px solid var(--piece-edge,#976783);background:linear-gradient(155deg,var(--piece-color,#342330),#141018);color:#f5eaf0;font-weight:760;font-size:clamp(1.2rem,2.3vw,2.8rem);box-shadow:0 24px 66px #000a,inset 0 0 0 10px #ffffff07;will-change:top,left,width,height,transform,opacity}
+.fx-museum-transition-piece::before{content:"";position:absolute;inset:4% 0;background:linear-gradient(90deg,#ffffff1b,transparent 12%,transparent 92%,#0503075c);pointer-events:none}
+.fx-room-departing main{opacity:0;transition:opacity .18s linear}
+.fx-room-arriving main{animation:fx-room-appear .44s ease both}
+@keyframes fx-room-appear{from{opacity:0;filter:blur(8px)}to{opacity:1;filter:blur(0)}}
+/* Return uses a cross-page overlay; the original book stays hidden until
+   the travelling piece reaches its exact on-screen place. */
+.fx-museum-book.fx-book-is-restacking{visibility:hidden!important}
+.fx-museum-transition-piece{backface-visibility:visible;-webkit-backface-visibility:visible}
+

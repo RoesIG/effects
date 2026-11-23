@@ -1,0 +1,47 @@
+/* FX Tools v4.4 — precise refinements only. Keep all original graphics and tools. */
+/* Align the text to the visible object (not to its result and buttons underneath).
+   Only applies to the side-by-side desktop layout; mobile stays stacked. */
+@media(min-width:691px){
+ body.fx-unified.fx-home #stage-coin>.stage-header{transform:translateY(-46px)}
+ body.fx-unified.fx-home #stage-random>.stage-header{transform:translateY(-68px)}
+ body.fx-unified.fx-home #stage-timer>.stage-header{transform:translateY(-72px)}
+ body.fx-unified.fx-home #stage-teams>.stage-header{transform:translateY(-14px)}
+}
+/* Dice: use independently interpolated transforms to prevent multi-axis 3D
+   matrix interpolation from jumping between orientations. The outer element
+   controls vertical travel, the middle Y rotation, inner X rotation. */
+body.fx-unified.fx-home .fx-die-lift,
+body.fx-unified.fx-home .fx-die-spin-y{
+ position:relative;width:var(--die-size);height:var(--die-size);
+ transform-style:preserve-3d;will-change:transform;
+}
+body.fx-unified.fx-home .fx-die-lift.is-rolling{
+ animation:fx44-die-bounce 1850ms linear both;
+}
+body.fx-unified.fx-home .fx-die-spin-y.is-rolling{
+ animation:fx44-die-spin-y 1850ms cubic-bezier(.22,.43,.28,1) both;
+}
+body.fx-unified.fx-home .fx-die.is-rolling{
+ animation:fx44-die-spin-x 1850ms cubic-bezier(.18,.42,.33,1) both;
+}
+@keyframes fx44-die-spin-x{
+ from{transform:rotateX(0deg)}to{transform:rotateX(720deg)}
+}
+@keyframes fx44-die-spin-y{
+ from{transform:rotateY(0deg)}to{transform:rotateY(720deg)}
+}
+@keyframes fx44-die-bounce{
+ 0%{transform:translateY(8px)}
+ 12%{transform:translateY(-36px)}
+ 34%{transform:translateY(-92px)}
+ 54%{transform:translateY(-105px)}
+ 72%{transform:translateY(-34px)}
+ 83%{transform:translateY(9px)}
+ 91%{transform:translateY(-8px)}
+ 100%{transform:translateY(0)}
+}
+@media(prefers-reduced-motion:reduce){
+ body.fx-unified.fx-home .fx-die-lift.is-rolling,
+ body.fx-unified.fx-home .fx-die-spin-y.is-rolling,
+ body.fx-unified.fx-home .fx-die.is-rolling{animation:none!important}
+}

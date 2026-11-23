@@ -1,0 +1,79 @@
+/* FX Tools · Museo v4.7 — dos caras reales, sin imágenes decorativas.
+   El lomo gira 180 grados hasta revelar un render de la sala de destino. */
+.fx-museum-transition.fx47-transition{perspective:1700px;perspective-origin:center center;isolation:isolate}
+.fx47-transition .fx47-piece{background:transparent!important;border:none!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important;display:block!important;transform-origin:top left;will-change:transform}
+.fx47-transition .fx47-flip{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform-origin:center;will-change:transform}
+.fx47-transition .fx47-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-style:preserve-3d;overflow:hidden}
+.fx47-transition .fx47-face-spine{transform:rotateY(0deg) translateZ(1px);overflow:visible}
+.fx47-transition .fx47-face-inside{transform:rotateY(180deg) translateZ(1px);background:#0d0b10;border:1px solid #614358;box-sizing:border-box;border-radius:5px;box-shadow:0 10px 34px #0009}
+.fx47-transition .fx47-room-surface{position:absolute;left:0;top:0;transform-origin:top left;overflow:hidden;background:#0d0b10;pointer-events:none}
+.fx47-transition .fx47-room-frame{display:block;width:100%;height:100%;border:0;background:#0d0b10;pointer-events:none}
+.fx47-transition .fx47-room-clone{height:100%;width:100%;min-height:100%;max-width:none;margin:0;overflow:hidden}
+.fx47-transition .fx47-face-spine>.fx-museum-transition-book{height:100%;width:100%;transform:none!important;filter:none!important;opacity:1}
+.fx47-transition .fx-museum-transition-book :is(.fx-book-animation,.fx-book-title){will-change:opacity}
+.fx47-transition .fx-book-medal-rotor,.fx47-transition .fx-book-cards-track,
+.fx47-transition .fx-book-tree{animation-play-state:paused!important}
+/* La página real toma el relevo de la segunda cara una vez abierta.
+   No hay blur ni pantalla vacía al terminar el giro. */
+.fx-room-arriving .app-shell{animation:fx47-room-enter 210ms ease-out both}
+@keyframes fx47-room-enter{from{opacity:.88}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.fx-room-arriving .app-shell{animation:none!important}}
+
+/* El duplicado del interior no desaparece con el main original al cerrar. */
+.fx-room-departing .fx47-room-clone main{opacity:1!important;animation:none!important;transition:none!important}
+
+
+/* v4.10 · Stable navigation across page changes.
+   Mirror the existing header over the travelling book (never an invented asset).
+   Its replacement title matches the destination before the new page is shown. */
+body.fx-unified.fx-sections .fx-museum-header-bridge{
+  position:fixed!important;z-index:10010!important;pointer-events:none!important;
+  box-sizing:border-box;margin:0!important;transform:none!important;
+  overflow:visible;isolation:isolate;
+}
+.fx-museum-header-bridge .fx-museum-title-old{
+  animation:fx-museum-header-title-out var(--fx-bridge-time,1020ms) linear both;
+}
+.fx-museum-header-bridge .fx-museum-title-next{
+  animation:fx-museum-header-title-in var(--fx-bridge-time,1020ms) linear both;
+}
+@keyframes fx-museum-header-title-out{
+  0%,32%{opacity:1}
+  66%,100%{opacity:0}
+}
+@keyframes fx-museum-header-title-in{
+  0%,32%{opacity:0}
+  66%,100%{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .fx-museum-header-bridge .fx-museum-title-old,.fx-museum-header-bridge .fx-museum-title-next{animation:none!important}
+}
+
+/* v4.11 · Entrada sin título duplicado.
+   El nombre viaja en el lomo; la cabecera mantiene solo logo y navegación.
+   El título de la sala reaparece al cargar el interior real. */
+body.fx-museum-opening > .app-shell > .fx-site-header .fx-top-room-title{
+  opacity:0!important;
+}
+.fx-museum-header-bridge.fx-museum-header-entry .fx-top-room-title{
+  animation:fx-museum-header-entry-title-out var(--fx-bridge-time,1120ms) ease-out both;
+}
+@keyframes fx-museum-header-entry-title-out{
+  0%{opacity:1}
+  19%,100%{opacity:0}
+}
+html.fx-museum-title-pending .fx-top-room-title{opacity:0!important}
+body.fx-museum-preview .fx-top-room-title{visibility:hidden!important}
+body.fx-museum-room-title-arriving > .app-shell > .fx-site-header .fx-top-room-title{
+  animation:fx-museum-room-title-arrive 380ms ease-out both;
+}
+@keyframes fx-museum-room-title-arrive{
+  from{opacity:0}
+  to{opacity:1}
+}
+@media (prefers-reduced-motion:reduce){
+  .fx-museum-header-bridge.fx-museum-header-entry .fx-top-room-title,
+  body.fx-museum-room-title-arriving > .app-shell > .fx-site-header .fx-top-room-title{
+    animation:none!important;
+  }
+}

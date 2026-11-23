@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#08080c" name="theme-color"/>
+<title>FX Tools · Estudio</title>
+<link href="assets/images/favicon.png?v=4.14" rel="icon" type="image/png"/>
+<link href="assets/images/favicon.png?v=4.14" rel="shortcut icon" type="image/png"/>
+<link href="assets/images/favicon.png?v=4.14" rel="apple-touch-icon"/>
+<link href="css/global.css" rel="stylesheet"/>
+<link href="css/home.css" rel="stylesheet"/>
+<link href="css/fx-unified.css?v=2.0" rel="stylesheet"/>
+<link href="css/fx-studio-v3.css?v=4.0" rel="stylesheet"/>
+<link href="css/fx-layout-clean.css?v=4.2" rel="stylesheet"/>
+<link rel="stylesheet" href="css/fx-v43.css?v=4.3"/><link rel="stylesheet" href="css/fx-v44.css?v=4.4"/><link rel="stylesheet" href="css/fx-v45.css?v=4.5"/></head>
+<body class="fx-unified fx-home">
+<svg aria-hidden="true" class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
+<symbol id="ic-home" viewbox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"></path><path d="M9 21v-8h6v8"></path></symbol>
+<symbol id="ic-skin" viewbox="0 0 24 24"><path d="m8 3 4 2 4-2 5 5-3 4-2-2v11H8V10l-2 2-3-4z"></path><path d="M10 7h4"></path></symbol>
+<symbol id="ic-clock" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></symbol>
+<symbol id="ic-museum" viewbox="0 0 24 24"><path d="m3 9 9-6 9 6M4 10h16M5 20h14M3 22h18M7 10v10M12 10v10M17 10v10"></path></symbol>
+<symbol id="ic-wheel" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2"></circle><path d="M12 3v7m0 4v7M3 12h7m4 0h7M5.6 5.6l5 5m2.8 2.8 5 5M18.4 5.6l-5 5m-2.8 2.8-5 5"></path></symbol>
+<symbol id="ic-coin" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M9 8h5a3 3 0 0 1 0 6H9m0-6v10m0-4h6"></path></symbol>
+<symbol id="ic-dice" viewbox="0 0 24 24"><rect height="18" rx="4" width="18" x="3" y="3"></rect><path d="M8 8h.01M16 8h.01M12 12h.01M8 16h.01M16 16h.01" stroke-linecap="round" stroke-width="3"></path></symbol>
+<symbol id="ic-teams" viewbox="0 0 24 24"><circle cx="8" cy="8" r="3"></circle><circle cx="17" cy="9" r="2.5"></circle><path d="M2 20v-2a6 6 0 0 1 12 0v2M15 15a5 5 0 0 1 7 4v1"></path></symbol>
+<symbol id="ic-download" viewbox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 17v4h16v-4"></path></symbol>
+<symbol id="ic-upload" viewbox="0 0 24 24"><path d="M12 16V4m-4 4 4-4 4 4M4 17v4h16v-4"></path></symbol>
+<symbol id="ic-arrow" viewbox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"></path></symbol>
+<symbol id="ic-spark" viewbox="0 0 24 24"><path d="m12 2 2.7 7.3L22 12l-7.3 2.7L12 22l-2.7-7.3L2 12l7.3-2.7z"></path></symbol>
+<symbol id="ic-chat" viewbox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.1 9.1 0 0 1-4.2-1.1L3 20l1.3-4.8A8.4 8.4 0 1 1 21 11.5Z"></path></symbol>
+<symbol id="ic-expand" viewbox="0 0 24 24"><path d="M4 9V4h5M20 15v5h-5M14 4h6v6M4 14v6h6"></path></symbol>
+<symbol id="ic-settings" viewbox="0 0 24 24"><path d="M4 7h16M4 17h16"></path><circle cx="9" cy="7" fill="currentColor" r="2" stroke="none"></circle><circle cx="16" cy="17" fill="currentColor" r="2" stroke="none"></circle></symbol>
+</svg>
+<div class="app-shell fx-shell fx-layout-clean">
+<header class="fx-site-header">
+<a aria-label="FX Tools, inicio" class="fx-header-brand" href="./">
+<span aria-hidden="true" class="fx-header-logo-slot"><img alt="" onerror="this.hidden=true" src="assets/images/favicon.png?v=4.14"/></span>
+<span class="fx-header-brand-copy"><strong>FX TOOLS</strong><small>EFFECTS · FX</small></span>
+</a>
+<nav aria-label="Secciones del canal" class="fx-primary-nav">
+<a aria-current="page" class="fx-section-link is-active" href="./"><svg class="ui-icon"><use href="#ic-home"></use></svg><span>Inicio</span></a>
+<a class="fx-section-link" href="skin-editor/"><svg class="ui-icon"><use href="#ic-skin"></use></svg><span>Editor de skins</span></a>
+<a class="fx-section-link" href="crono/"><svg class="ui-icon"><use href="#ic-clock"></use></svg><span>Crono Hardcore</span></a>
+<a class="fx-section-link" href="museo/"><svg class="ui-icon"><use href="#ic-museum"></use></svg><span>Museo</span></a>
+<button aria-label="Ajustes" class="fx-header-settings" id="open-settings" title="Ajustes" type="button"><svg class="ui-icon"><use href="#ic-settings"></use></svg></button>
+</nav>
+</header>
+<main class="main fx-main">
+<div class="workspace-layout">
+<section aria-label="Herramientas principales" class="workspace">
+<div class="stage-surface" id="stage-surface">
+<div aria-hidden="true" class="stage-grid-decoration"></div>
+<section aria-labelledby="tab-roulette" class="tool-stage is-current" id="stage-roulette" role="tabpanel">
+
+<div class="fx-roulette-info"><div class="stage-header"><div><h2>Ruleta<span class="fx-heading-period">.</span></h2></div></div><div class="roulette-side"><div class="result-block"><span class="result-caption">Último resultado</span><strong aria-live="polite" id="roulette-result">—</strong></div><button class="btn primary action-btn" id="spin-btn" type="button">Girar ruleta <svg class="ui-icon"><use href="#ic-arrow"></use></svg></button><button class="btn subtle-btn" id="edit-roulette" type="button"><svg class="ui-icon"><use href="#ic-settings"></use></svg> Editar opciones</button></div></div><div class="roulette-scene" id="ruleta">
+<div class="wheel-area"><div class="wheel-halo"><div class="wheel-wrap"><div class="wheel-pointer"></div><canvas aria-label="Ruleta de opciones" height="720" id="wheel" width="720"></canvas><div class="wheel-center"><span>FX</span></div></div></div></div>
+
+</div>
+</section>
+<section aria-labelledby="tab-coin" class="tool-stage" hidden="" id="stage-coin" role="tabpanel">
+<div class="stage-header"><div><h2>Cara o cruz</h2></div></div>
+<div class="centered-tool coin-scene"><div class="coin-aura fx-coin-perspective"><div class="fx-coin-lift"><div class="fx-coin-tilt"><div class="fx-coin-object" id="coin" aria-hidden="true"><div class="fx-coin-edge" aria-hidden="true"></div><div class="fx-coin-face fx-coin-front"><span>CARA</span></div><div class="fx-coin-face fx-coin-back"><span>CRUZ</span></div></div></div></div><div class="fx-coin-shadow" aria-hidden="true"></div></div><div class="scene-under"><div aria-live="polite" class="small-label" id="coin-status">Lanza la moneda</div><button class="btn primary action-btn" id="coin-flip" type="button">Lanzar moneda <svg class="ui-icon"><use href="#ic-arrow"></use></svg></button></div></div>
+</section>
+<section aria-labelledby="tab-random" class="tool-stage" hidden="" id="stage-random" role="tabpanel">
+<div class="stage-header"><div><h2>Número aleatorio</h2></div></div>
+<div class="centered-tool random-scene"><div class="fx-die-stage"><div class="fx-die-shadow"></div><div class="fx-die-lift"><div class="fx-die-tilt"><div class="fx-die-spin-y"><div class="fx-die" id="fx-die" aria-hidden="true"><div class="fx-die-face fx-die-front"><span class="fx-die-screen" id="fx-die-screen">—</span></div><div class="fx-die-face fx-die-back"><span class="fx-die-screen">···</span></div><div class="fx-die-face fx-die-right"><span class="fx-die-screen">···</span></div><div class="fx-die-face fx-die-left"><span class="fx-die-screen">···</span></div><div class="fx-die-face fx-die-top"><span class="fx-die-screen">···</span></div><div class="fx-die-face fx-die-bottom"><span class="fx-die-screen">···</span></div></div></div></div></div></div><output aria-live="polite" aria-atomic="true" class="fx-visually-hidden" id="random-result">—</output><div class="random-controls"><div class="field"><label for="random-min">Mínimo</label><input class="input" id="random-min" type="number" value="1"/></div><div class="field"><label for="random-max">Máximo</label><input class="input" id="random-max" type="number" value="100"/></div></div><button class="btn primary action-btn" id="random-generate" type="button">Generar número <svg class="ui-icon"><use href="#ic-arrow"></use></svg></button></div>
+</section>
+<section aria-labelledby="tab-timer" class="tool-stage" hidden="" id="stage-timer" role="tabpanel">
+<div class="stage-header"><div><h2>Temporizador</h2></div></div>
+<div class="centered-tool timer-scene"><div class="timer-ring" id="timer-ring"><div aria-live="off" class="timer-display" id="timer-display">05:00</div></div><div class="timer-controls"><div class="field"><label for="timer-minutes">Minutos</label><div class="timer-config"><input class="input" id="timer-minutes" max="999" min="1" type="number" value="5"/><button class="btn subtle-btn" id="timer-set" type="button">Aplicar</button></div></div><div class="timer-actions"><button class="btn primary" id="timer-start" type="button">Iniciar</button><button class="btn subtle-btn" id="timer-reset" type="button">Reiniciar</button></div></div></div>
+</section>
+<section aria-labelledby="tab-teams" class="tool-stage" hidden="" id="stage-teams" role="tabpanel">
+<div class="stage-header"><div><h2>Generador de equipos</h2></div></div>
+<div class="teams-scene" id="equipos"><div class="team-form"><div class="field"><label for="players-input">Participantes · separados por comas</label><textarea class="textarea" id="players-input"></textarea></div><div class="team-actions"><div class="field"><label>Número de equipos</label><div class="team-count"><button aria-label="Quitar equipo" class="btn icon small" id="teams-minus" type="button">−</button><output id="teams-count">2</output><button aria-label="Añadir equipo" class="btn icon small" id="teams-plus" type="button">+</button></div></div><button class="btn primary action-btn" id="generate-teams" type="button">Generar equipos <svg class="ui-icon"><use href="#ic-arrow"></use></svg></button></div></div><div aria-live="polite" class="teams-output" id="teams-output"></div></div>
+</section>
+</div>
+<div aria-label="Seleccionar herramienta" class="stage-nav" role="tablist">
+<button aria-controls="stage-roulette" aria-selected="true" class="stage-tab is-active" data-stage="roulette" id="tab-roulette" role="tab" type="button"><img alt="" class="fx-custom-tool-icon" loading="eager" onerror="this.hidden=true" onload="this.nextElementSibling.hidden=true" src="assets/images/RULETA.png"/><span aria-hidden="true" class="fx-image-slot"></span><span>Ruleta</span></button>
+<button aria-controls="stage-coin" aria-selected="false" class="stage-tab" data-stage="coin" id="tab-coin" role="tab" type="button"><svg class="ui-icon"><use href="#ic-coin"></use></svg><span>Cara o cruz</span></button>
+<button aria-controls="stage-random" aria-selected="false" class="stage-tab" data-stage="random" id="tab-random" role="tab" type="button"><img alt="" class="fx-custom-tool-icon" loading="eager" onerror="this.hidden=true" onload="this.nextElementSibling.hidden=true" src="assets/images/DADOS.png"/><span aria-hidden="true" class="fx-image-slot"></span><span>Número</span></button>
+<button aria-controls="stage-timer" aria-selected="false" class="stage-tab" data-stage="timer" id="tab-timer" role="tab" type="button"><svg class="ui-icon"><use href="#ic-clock"></use></svg><span>Temporizador</span></button>
+<button aria-controls="stage-teams" aria-selected="false" class="stage-tab" data-stage="teams" id="tab-teams" role="tab" type="button"><svg class="ui-icon"><use href="#ic-teams"></use></svg><span>Equipos</span></button>
+</div>
+</section>
+<aside aria-label="Chat unificado" class="chat-area" id="chat">
+<div class="chat-head">
+<div class="chat-head-info"><div class="chat-overline">EN DIRECTO / COMUNIDAD</div><div class="chat-title"><span class="chat-signal"></span><h2>Chat unificado</h2></div></div>
+<div class="chat-head-actions">
+<button aria-pressed="false" class="chat-icon-btn" id="toggle-live-mode" title="Modo directo" type="button"><svg class="ui-icon"><use href="#ic-expand"></use></svg></button>
+<button aria-label="Configurar chat" class="chat-icon-btn" id="chat-settings-trigger" title="Configurar chat" type="button"><svg class="ui-icon"><use href="#ic-settings"></use></svg></button>
+</div>
+</div>
+<div aria-label="Plataformas compatibles" class="chat-platforms"><span class="platform-chip twitch">Twitch</span><span class="platform-chip youtube">YouTube</span><span class="platform-chip tiktok">TikTok</span></div>
+<div aria-label="Contenido del panel" class="chat-tabs" role="tablist">
+<button aria-selected="true" class="chat-tab is-active" data-chat-tab="messages" role="tab" type="button">Mensajes</button>
+<button aria-selected="false" class="chat-tab" data-chat-tab="activity" role="tab" type="button">Actividad</button>
+</div>
+<div class="chat-content">
+<div class="chat-view is-active" id="chat-messages" role="tabpanel">
+<div class="chat-empty" id="chat-empty">
+<div class="chat-empty-art"><span>◌</span><span>◌</span><span>◌</span></div>
+<strong>Chat sin conectar</strong>
+<p>Conecta una fuente de chat combinado para leer tus mensajes aquí, sin abrir otra ventana.</p>
+<button class="btn primary" id="chat-connect" type="button">Conectar chat</button>
+</div>
+<iframe class="unified-chat-frame" hidden="" id="unified-chat-frame" referrerpolicy="strict-origin-when-cross-origin" src="about:blank" title="Chat unificado de lectura"></iframe>
+</div>
+<div class="chat-view" hidden="" id="chat-activity" role="tabpanel">
+<div class="chat-empty chat-activity-empty"><div class="chat-empty-art">✧</div><strong>Actividad reciente</strong><p>Espacio reservado para seguidores, suscripciones y eventos. Todavía no hay un proveedor de actividad conectado.</p></div>
+</div>
+</div>
+<div class="chat-footer"><span id="chat-connection-label"><span class="chat-offline-dot"></span> Sin conectar</span><button class="chat-open-link" hidden="" id="chat-open-link" type="button">Abrir fuente ↗</button></div>
+</aside>
+</div>
+</main>
+</div>
+<div aria-labelledby="chat-modal-title" aria-modal="true" class="modal-backdrop" id="modal-chat" role="dialog"><div class="modal-card chat-modal"><div class="modal-head"><div><div class="panel-title" id="chat-modal-title">Conectar el chat unificado</div><div class="panel-desc">Pega el enlace de un visor combinado que permita mostrarse en otra página. FX Tools no recibe automáticamente los mensajes de las plataformas.</div></div><button aria-label="Cerrar" class="btn icon small" data-close="" type="button">×</button></div><div class="modal-body"><label class="chat-modal-label" for="chat-source-url">URL de tu visor combinado</label><input autocomplete="off" class="input" id="chat-source-url" placeholder="https://…" spellcheck="false" type="url"><p class="chat-modal-help">Necesitas un proveedor que recopile los chats. Algunas páginas impiden su uso en iframe; si ocurre, usa una URL de visor diseñada para incrustar, no la página normal de Twitch o TikTok.</p><div class="chat-modal-actions"><button class="btn" id="chat-remove-source" type="button">Desconectar</button><button class="btn primary" id="chat-save-source" type="button">Guardar fuente</button></div></input></div></div></div>
+<div aria-labelledby="settings-modal-title" aria-modal="true" class="modal-backdrop" id="modal-settings" role="dialog"><div class="modal-card"><div class="modal-head"><div><div class="panel-title" id="settings-modal-title">Ajustes</div><div class="panel-desc">Gestiona tu copia de seguridad y otras opciones del estudio.</div></div><button aria-label="Cerrar" class="btn icon small" data-close="" type="button">×</button></div><div class="modal-body settings-modal-body"><div class="settings-actions"><button class="btn backup-btn" id="export-data" type="button"><svg class="ui-icon"><use href="#ic-download"></use></svg><span>Exportar datos</span></button><label class="btn backup-btn" for="import-data" role="button" tabindex="0"><svg class="ui-icon"><use href="#ic-upload"></use></svg><span>Importar datos</span></label><input accept=".json,application/json" hidden="" id="import-data" type="file"/></div><p class="chat-modal-help">Usa exportar para guardar una copia de tus datos. Importar reemplazará los datos guardados en este navegador.</p></div></div></div>
+<div aria-labelledby="roulette-modal-title" aria-modal="true" class="modal-backdrop" id="modal-roulette" role="dialog"><div class="modal-card"><div class="modal-head"><div><div class="panel-title" id="roulette-modal-title">Opciones de ruleta</div><div class="panel-desc">Escribe las opciones separadas por comas. Máximo 24.</div></div><button aria-label="Cerrar" class="btn icon small" data-close="" type="button">×</button></div><div class="modal-body"><textarea aria-label="Opciones separadas por comas" class="textarea" id="roulette-options"></textarea></div><div class="modal-actions"><button class="btn" data-close="" type="button">Cancelar</button><button class="btn primary" id="save-roulette" type="button">Guardar opciones</button></div></div></div>
+<div aria-live="polite" class="toast-wrap"></div>
+<script src="js/storage.js"></script><script src="js/roulette.js"></script><script src="js/teams.js"></script><script src="js/timer.js"></script><script src="js/home.js?v=4.4"></script>
+<script src="js/section-gallery.js"></script><script src="js/fx-studio-v3.js"></script></body></html>

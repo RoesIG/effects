@@ -1,0 +1,39 @@
+/* FX Tools v4.5: smooth coin motion. Existing designs, logos and tools unchanged. */
+body.fx-unified.fx-home .fx-coin-lift,
+body.fx-unified.fx-home .fx-coin-tilt{
+  width:var(--coin-size);height:var(--coin-size);
+  position:relative;transform-style:preserve-3d;
+  will-change:transform;
+}
+body.fx-unified.fx-home .fx-coin-tilt{transform:rotateX(10deg)}
+body.fx-unified.fx-home .fx-coin-object{
+  transform:rotateY(0deg);backface-visibility:visible;
+  animation:none!important;
+}
+body.fx-unified.fx-home .fx-coin-lift.is-flipping{
+  animation:fx45-coin-flight 2200ms linear both;
+}
+body.fx-unified.fx-home .fx-coin-tilt.is-flipping{
+  animation:fx45-coin-tilt 2200ms ease-in-out both;
+}
+@keyframes fx45-coin-flight{
+  0%{transform:translate3d(0,4px,0)}
+  15%{transform:translate3d(0,-46px,0)}
+  38%{transform:translate3d(0,-108px,0)}
+  53%{transform:translate3d(0,-119px,0)}
+  73%{transform:translate3d(0,-47px,0)}
+  85%{transform:translate3d(0,7px,0)}
+  93%{transform:translate3d(0,-9px,0)}
+  100%{transform:translate3d(0,0,0)}
+}
+@keyframes fx45-coin-tilt{
+  0%{transform:rotateX(10deg) rotateZ(0deg)}
+  32%{transform:rotateX(22deg) rotateZ(-6deg)}
+  65%{transform:rotateX(-9deg) rotateZ(4deg)}
+  87%{transform:rotateX(8deg) rotateZ(-1.5deg)}
+  100%{transform:rotateX(10deg) rotateZ(0deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  body.fx-unified.fx-home .fx-coin-lift.is-flipping,
+  body.fx-unified.fx-home .fx-coin-tilt.is-flipping{animation:none!important}
+}

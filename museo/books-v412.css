@@ -1,0 +1,85 @@
+/* FX Tools v4.12 · Previsualizaciones por interacción.
+   Solo afecta los tres libros activos del Museo. El libro antiguo de
+   Cobblemon Tracker, las salas y la animación 3D de navegación no cambian. */
+
+/* Reposo: ninguna previsualización consume animación continuamente. */
+.fx-book-champions .fx-book-medal-rotor{
+  animation:none;
+  transform:rotateY(0deg);
+}
+.fx-book-club .fx-book-tree{
+  animation:none;
+  filter:brightness(.92);
+}
+.fx-book-legends .fx-book-cards-track{
+  /* El tiempo de la cinta continúa desde donde se detuvo, sin reiniciarse. */
+  animation-play-state:paused;
+}
+.fx-book-legends:is(:hover,:focus-visible) .fx-book-cards-track{
+  animation-play-state:running;
+}
+
+/* Una vuelta completa al entrar: misma posición al inicio y al final.
+   El JS retira esta clase al terminar (no al salir el cursor), de modo
+   que tampoco se corta una vuelta a medias. */
+.fx-book-champions.fx-preview-active .fx-book-medal-rotor{
+  animation:fx412-medal-turn 4200ms cubic-bezier(.30,.04,.18,1) 1 both;
+  animation-delay:0s;
+}
+@keyframes fx412-medal-turn{
+  from{transform:rotateY(0deg)}
+  to{transform:rotateY(360deg)}
+}
+
+/* Árbol inmóvil: solo una respiración visible de iluminación por entrada.
+   Se iluminan nodos y ramas a la vez; no viaja ningún trazo. */
+.fx-book-club.fx-preview-active .fx-book-tree{
+  animation:fx412-tree-glow 3900ms ease-in-out 1 both;
+}
+@keyframes fx412-tree-glow{
+  0%,100%{filter:brightness(.92) drop-shadow(0 0 0 transparent)}
+  48%{filter:brightness(1.58) drop-shadow(0 0 5px rgba(232,151,196,.82))}
+}
+
+/* Las copias durante el viaje no heredan ni activan las previsualizaciones. */
+.fx-museum-transition-book .fx-book-medal-rotor,
+.fx-museum-transition-book .fx-book-tree{
+  animation:none!important;
+}
+.fx-museum-transition-book .fx-book-cards-track{
+  animation-play-state:paused!important;
+}
+
+/* Dentro del libro gira solo el contenido de la sala, no otra cabecera.
+   La barra superior verdadera sigue visible mediante el puente actual. */
+body.fx-museum-preview .app-shell > .fx-site-header{
+  visibility:hidden!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .fx-book-champions.fx-preview-active .fx-book-medal-rotor,
+  .fx-book-club.fx-preview-active .fx-book-tree{
+    animation:none!important;
+  }
+  .fx-book-legends:is(:hover,:focus-visible) .fx-book-cards-track{
+    animation-play-state:paused!important;
+  }
+}
+
+/* v4.13: La vista giratoria del INTERIOR del libro no es una segunda página
+   completa. No debe enseñar ni una segunda barra superior, ni el acceso de
+   vuelta, ni la navegación de regiones o las cabeceras de sala. Se reservan
+   sus espacios para que el contenido no salte al pasar a la página real.
+   Esta regla solo se aplica al iframe temporal con fx_book_preview=1. */
+html.fx-museum-preview .app-shell > .fx-site-header,
+html.fx-museum-preview .app-shell > .fx-site-header *,
+html.fx-museum-preview .museum-v3-back,
+html.fx-museum-preview .museum-back,
+html.fx-museum-preview .coin-gallery-header,
+html.fx-museum-preview .coin-region-tabs,
+html.fx-museum-preview .coin-gallery-topline,
+html.fx-museum-preview .legend-hero,
+html.fx-museum-preview .members-hero,
+html.fx-museum-preview .club-tree-head {
+  visibility: hidden !important;
+}

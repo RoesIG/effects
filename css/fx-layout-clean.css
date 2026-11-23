@@ -1,0 +1,200 @@
+/* FX Tools / 4.1 — Reorganization of Inicio only.
+   No new raster or vector images. User assets keep their original filenames.
+   Original roulette, coin animation, timer, teams, random and chat scripts untouched. */
+
+body.fx-home { --fx-rose:#d77aab; --fx-rose-soft:#efb2cf; --fx-ink:#0c0b10; background:#0c0b10; }
+body.fx-home .app-shell.fx-layout-clean {
+  display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:84px minmax(0,1fr);
+  width:100%;max-width:none;min-height:100svh;height:100svh;overflow:hidden;
+  margin:0;padding:0;border:0;border-radius:0;background:#0e0c11;box-shadow:none;
+}
+/* Top-right section navigation; no fabricated crest or logo fallback. */
+body.fx-home .fx-site-header {
+  min-width:0; display:flex; align-items:stretch; justify-content:space-between; gap:24px;
+  height:84px; padding:0 clamp(18px,2.2vw,40px);border-bottom:1px solid #382c376c;
+  background:#110e13;
+}
+body.fx-home .fx-header-brand { display:flex;align-items:center;gap:10px;text-decoration:none;color:#f5eef2;flex:0 0 auto; }
+body.fx-home .fx-header-logo-slot {display:block;flex:none;width:43px;height:43px;position:relative;}
+body.fx-home .fx-header-logo-slot img {position:absolute;inset:0;width:100%;height:100%;object-fit:contain;}
+body.fx-home .fx-header-logo-slot img[hidden] {display:none;}
+body.fx-home .fx-header-brand-copy{display:flex;flex-direction:column;gap:4px;}
+body.fx-home .fx-header-brand-copy strong{font-size:13px;font-weight:850;letter-spacing:.115em;line-height:1.1;}
+body.fx-home .fx-header-brand-copy small{font-size:8px;font-weight:700;letter-spacing:.22em;color:#c4a7ba;line-height:1.3;}
+body.fx-home .fx-primary-nav{min-width:0;display:flex;align-items:stretch;justify-content:flex-end;gap:clamp(6px,1.4vw,26px);}
+body.fx-home .fx-section-link {position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:0 9px;
+ text-decoration:none;white-space:nowrap;font-size:12px;font-weight:600;color:#aa99aa;transition:color .18s;}
+body.fx-home .fx-section-link .ui-icon {height:16px;width:16px;color:#b5a6b4;}
+body.fx-home .fx-section-link:hover,body.fx-home .fx-section-link.is-active{color:#fff;}
+body.fx-home .fx-section-link.is-active:after {content:"";position:absolute;bottom:-1px;left:4px;right:4px;height:2px;background:#e59abf;}
+body.fx-home .fx-header-settings {display:grid;place-items:center;align-self:center;flex:0 0 auto;
+ height:38px;width:38px;margin-left:clamp(0px,1vw,10px);padding:0;border:0;border-radius:8px;cursor:pointer;background:transparent;color:#a99aa8;}
+body.fx-home .fx-header-settings:hover {color:#fff;background:#ffffff0c;}
+body.fx-home .fx-header-settings .ui-icon{width:18px;height:18px;}
+
+/* Continuous studio surface + prominent real unified chat. */
+body.fx-unified.fx-home .fx-main {display:flex;flex-direction:column;min-width:0;min-height:0;height:auto;
+ overflow:hidden;padding:0;background:#0e0c11;}
+body.fx-unified.fx-home .workspace-layout {display:grid;grid-template-columns:minmax(0,1fr) clamp(340px,23vw,450px);
+ gap:0;flex:1 1 auto;min-width:0;min-height:0;align-items:stretch;}
+body.fx-unified.fx-home .workspace{display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;}
+body.fx-unified.fx-home .stage-surface{position:relative;display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;
+ border:0;border-radius:0;box-shadow:none;background:radial-gradient(ellipse 35% 48% at 64% 50%,#49263626,transparent 92%),#0e0c11;}
+body.fx-unified.fx-home .stage-surface::after{display:none;}
+body.fx-unified.fx-home .stage-grid-decoration{display:none;}
+body.fx-unified.fx-home .tool-stage {min-height:0;height:100%;flex:1 1 auto;padding:clamp(18px,3vw,50px);overflow:auto;scrollbar-width:thin;}
+body.fx-unified.fx-home .tool-stage[hidden]{display:none!important;}
+/* Bottom app launcher: actual original buttons and user-owned icons/slots. */
+body.fx-unified.fx-home .stage-nav{flex:0 0 99px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+ align-items:stretch;gap:0;margin:0;padding:0 clamp(18px,3vw,45px);border:0;border-top:1px solid #49344273;
+ border-radius:0;overflow:visible;background:#110e14;}
+body.fx-unified.fx-home .stage-tab{flex:initial;min-width:0;min-height:0;height:100%;padding:14px 3px 12px;
+ display:flex;flex-direction:column;gap:7px;align-items:center;justify-content:center;border:0;border-radius:0;
+ font-size:12px;font-weight:580;line-height:1.1;background:none;color:#ada1ae;}
+body.fx-unified.fx-home .stage-tab .ui-icon,body.fx-unified.fx-home .stage-tab .fx-custom-tool-icon,
+body.fx-unified.fx-home .stage-tab .fx-image-slot {width:23px;height:23px;flex:0 0 23px;}
+body.fx-unified.fx-home .stage-tab .fx-custom-tool-icon{object-fit:contain;}
+body.fx-unified.fx-home .stage-tab .fx-custom-tool-icon[hidden]{display:none;}
+body.fx-unified.fx-home .stage-tab .fx-image-slot[hidden]{display:none;}
+body.fx-unified.fx-home .stage-tab .fx-image-slot{display:block;}
+body.fx-unified.fx-home .stage-tab:hover{background:#f6a6c60a;color:#fff;}
+body.fx-unified.fx-home .stage-tab.is-active{background:none;color:#fff;}
+body.fx-unified.fx-home .stage-tab.is-active .ui-icon{color:#eca1c5;}
+body.fx-unified.fx-home .stage-tab.is-active:after{position:absolute;content:"";top:0;bottom:auto;left:38%;right:38%;height:2px;
+ background:#ee9fc5;box-shadow:0 0 13px #e68bb977;}
+/* No panels around the original tools. On roulette only, change their placement, not their mechanics. */
+body.fx-unified.fx-home #stage-roulette {display:grid;grid-template-areas:"heading wheel" "actions wheel";
+ grid-template-columns:minmax(210px,31%) minmax(0,1fr);grid-template-rows:auto 1fr;
+ gap:0 clamp(16px,2.7vw,50px);align-items:center;align-content:center;padding:20px clamp(22px,3.5vw,64px);}
+body.fx-unified.fx-home #stage-roulette .stage-header {grid-area:heading;align-self:end;display:block;margin-bottom:12px;}
+body.fx-unified.fx-home #stage-roulette .stage-header h2{font-size:clamp(3.2rem,5.6vw,6rem);line-height:1;letter-spacing:-.075em;
+ font-weight:820;margin:22px 0 0;white-space:nowrap;}
+body.fx-unified.fx-home #stage-roulette .fx-heading-period{color:#e087b1;}
+body.fx-unified.fx-home #stage-roulette .stage-index{font-size:9px;letter-spacing:.27em;white-space:nowrap;color:#d99dbb;}
+body.fx-unified.fx-home #stage-roulette .roulette-scene{display:contents;}
+body.fx-unified.fx-home #stage-roulette .wheel-area{grid-area:wheel;min-width:0;align-self:center;justify-self:center;width:100%;overflow:visible;}
+body.fx-unified.fx-home #stage-roulette .wheel-halo{width:100%;max-width:min(520px,52svh);}
+body.fx-unified.fx-home #stage-roulette .wheel-wrap {max-width:100%;}
+body.fx-unified.fx-home #stage-roulette .roulette-side{grid-area:actions;justify-self:start;align-self:start;
+ max-width:290px;min-width:0;width:100%;gap:14px;margin:0;display:flex;flex-direction:column;}
+body.fx-unified.fx-home #stage-roulette .result-block{padding:9px 0 15px;border-top:1px solid #5940506b;
+ border-bottom:1px solid #5940506b;}
+body.fx-unified.fx-home #stage-roulette .result-caption{display:block;font-size:10px;letter-spacing:.16em;color:#a996a7;margin-bottom:8px;}
+body.fx-unified.fx-home #stage-roulette #roulette-result{font-size:clamp(1.4rem,2vw,2.15rem);margin:0;line-height:1.15;}
+body.fx-unified.fx-home #stage-roulette .action-btn{width:100%;min-height:47px;}
+body.fx-unified.fx-home #stage-roulette #edit-roulette{display:flex;justify-content:center;align-items:center;gap:9px;
+ width:100%;min-height:43px;border-radius:9px;background:transparent;}
+body.fx-unified.fx-home #stage-roulette .stage-hint {display:none;}
+/* Other original components use their existing layout, dimensions, visuals and animations. */
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .stage-header {flex:0 0 auto;}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .stage-header h2 {font-size:clamp(1.9rem,3.2vw,3.4rem);margin:10px 0;}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .centered-tool{min-height:0;flex:1 1 auto;}
+body.fx-unified.fx-home .tool-stage:not(#stage-roulette) .teams-scene {overflow:auto;}
+body.fx-unified.fx-home .chat-area {position:relative;top:0;align-self:stretch;display:flex;flex-direction:column;
+ width:auto;height:100%;min-height:0;max-height:none;margin:0;padding:0;overflow:hidden;
+ border:0;border-left:1px solid #53394985;border-radius:0;
+ box-shadow:none;background:#100e13;}
+body.fx-unified.fx-home .chat-head {padding:28px 24px 15px;min-height:0;margin:0;}
+body.fx-unified.fx-home .chat-overline{display:none;}
+body.fx-unified.fx-home .chat-title {gap:9px;}
+body.fx-unified.fx-home .chat-title h2 {font-size:1.28rem;letter-spacing:-.035em;}
+body.fx-unified.fx-home .chat-platforms {padding:0 24px 18px;gap:8px;}
+body.fx-unified.fx-home .platform-chip {border:0;padding:5px 7px;border-radius:4px;background:transparent;font-size:.65rem;}
+body.fx-unified.fx-home .chat-tabs {padding:0 20px;border-color:#4c37435c;}
+body.fx-unified.fx-home .chat-content{flex:1 1 auto;min-height:0;}
+body.fx-unified.fx-home .chat-view {min-height:0;}
+body.fx-unified.fx-home .chat-empty{background:transparent;min-height:0;flex:1;padding:20px 27px;gap:13px;}
+body.fx-unified.fx-home .chat-empty-art,body.fx-unified.fx-home .chat-empty p{display:none;}
+body.fx-unified.fx-home .chat-empty strong{font-size:.9rem;}
+body.fx-unified.fx-home .chat-footer{margin-top:auto;min-height:44px;padding:11px 22px;}
+body.fx-unified.fx-home .unified-chat-frame{min-height:0;background:#100e13;}
+/* Full-screen compact chat remains unchanged in behavior. */
+body.fx-unified.fx-home.fx-direct-mode .app-shell.fx-layout-clean {display:block;min-height:100svh;height:100svh;}
+body.fx-unified.fx-home.fx-direct-mode .fx-site-header{display:none;}
+body.fx-unified.fx-home.fx-direct-mode .fx-main{height:100svh;display:flex;padding:9px;}
+body.fx-unified.fx-home.fx-direct-mode .workspace-layout{display:flex;flex:1;min-height:0;}
+body.fx-unified.fx-home.fx-direct-mode .workspace{display:none!important;}
+body.fx-unified.fx-home.fx-direct-mode .chat-area{width:100%;height:100%;min-height:0;border:1px solid #53394985;border-radius:10px;}
+
+@media(max-width:1140px){
+ body.fx-home .app-shell.fx-layout-clean{height:auto;min-height:100svh;overflow:visible;grid-template-rows:auto 1fr;}
+ body.fx-home .fx-site-header{height:auto;min-height:80px;flex-wrap:wrap;padding:13px 22px 0;gap:3px 18px;}
+ body.fx-home .fx-primary-nav{flex-wrap:wrap;min-height:53px;gap:0 10px;}
+ body.fx-home .fx-section-link{min-height:50px;}
+ body.fx-unified.fx-home .fx-main{height:auto;min-height:calc(100svh - 80px);overflow:visible;}
+ body.fx-unified.fx-home .workspace-layout{grid-template-columns:minmax(0,1fr);}
+ body.fx-unified.fx-home .workspace{overflow:visible;min-height:650px;}
+ body.fx-unified.fx-home .stage-surface{min-height:550px;}
+ body.fx-unified.fx-home .tool-stage{min-height:550px;overflow:visible;}
+ body.fx-unified.fx-home .chat-area{height:560px;min-height:500px;border-left:0;border-top:1px solid #53394985;}
+ body.fx-unified.fx-home #stage-roulette .wheel-halo{max-width:min(420px,43vw);}
+}
+@media(max-width:690px){
+ body.fx-home .fx-site-header{justify-content:center;gap:8px;padding:15px 12px 0;}
+ body.fx-home .fx-header-brand{margin-right:auto;}
+ body.fx-home .fx-primary-nav{width:100%;justify-content:space-between;gap:0;}
+ body.fx-home .fx-section-link{gap:4px;padding:0 3px;font-size:10px;}
+ body.fx-home .fx-section-link .ui-icon{width:15px;height:15px;}
+ body.fx-home .fx-header-settings{margin-left:0;width:30px;}
+ body.fx-unified.fx-home .stage-nav{padding:0 5px;flex-basis:78px;}
+ body.fx-unified.fx-home .stage-tab{font-size:9px;gap:5px;padding:9px 2px;}
+ body.fx-unified.fx-home .stage-tab .ui-icon,body.fx-unified.fx-home .stage-tab .fx-custom-tool-icon,body.fx-unified.fx-home .stage-tab .fx-image-slot {width:20px;height:20px;flex-basis:20px;}
+ body.fx-unified.fx-home #stage-roulette{display:flex;flex-direction:column;padding:25px 17px;align-items:stretch;gap:13px;}
+ body.fx-unified.fx-home #stage-roulette .stage-header{margin:0;align-self:stretch;}
+ body.fx-unified.fx-home #stage-roulette .stage-header h2{font-size:clamp(3rem,12vw,4.5rem);margin-top:8px;}
+ body.fx-unified.fx-home #stage-roulette .roulette-scene{display:flex;flex-direction:column;gap:17px;min-height:0;}
+ body.fx-unified.fx-home #stage-roulette .wheel-area{order:0;align-self:center;}
+ body.fx-unified.fx-home #stage-roulette .wheel-halo{max-width:min(320px,76vw);}
+ body.fx-unified.fx-home #stage-roulette .roulette-side{order:1;align-self:center;max-width:350px;}
+ body.fx-unified.fx-home .chat-head{padding:20px 15px 12px;}
+ body.fx-unified.fx-home .chat-platforms{padding:0 15px 14px;}
+ body.fx-unified.fx-home .chat-area{min-height:470px;height:500px;}
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette){padding:25px 15px;}
+}
+/* V4's legacy full-viewport rules have a more specific :not() selector.
+   Override only the layout dimensions they previously controlled. */
+@media(min-width:1111px){
+ body.fx-unified.fx-home:not(.fx-direct-mode) .fx-main{
+   height:auto;min-height:0;overflow:hidden;padding:0;background:#0e0c11;
+ }
+ body.fx-unified.fx-home:not(.fx-direct-mode) .workspace-layout{
+   grid-template-columns:minmax(0,1fr) clamp(340px,23vw,450px);gap:0;min-height:0;
+ }
+ body.fx-unified.fx-home:not(.fx-direct-mode) .workspace {overflow:hidden;min-height:0;}
+ body.fx-unified.fx-home:not(.fx-direct-mode) .stage-nav {flex:0 0 99px;}
+ body.fx-unified.fx-home:not(.fx-direct-mode) .stage-surface {min-height:0;}
+ body.fx-unified.fx-home:not(.fx-direct-mode) .chat-area{
+   top:0;height:100%;min-height:0;padding:0;border:0;border-left:1px solid #53394985;border-radius:0;background:#100e13;
+ }
+}
+/* Small-screen chat: legacy generic mobile button flex must not stretch Connect. */
+body.fx-unified.fx-home .chat-empty .btn {flex:0 0 auto;align-self:center;min-height:42px;padding-inline:18px;}
+
+/* 4.2 — balanced original tool placements (no changes to drawing/animations). */
+@media(min-width:691px){
+ body.fx-unified.fx-home #stage-roulette{
+   grid-template-areas:none;grid-template-rows:minmax(0,1fr);grid-template-columns:minmax(210px,31%) minmax(0,1fr);
+   align-content:stretch;align-items:center;
+ }
+ body.fx-unified.fx-home #stage-roulette .fx-roulette-info{grid-column:1;grid-row:1;align-self:center;display:flex;flex-direction:column;gap:13px;min-width:0;}
+ body.fx-unified.fx-home #stage-roulette .stage-header{grid-area:auto;align-self:auto;margin:0;}
+ body.fx-unified.fx-home #stage-roulette .roulette-side{grid-area:auto;align-self:auto;justify-self:start;}
+ body.fx-unified.fx-home #stage-roulette .wheel-area{grid-area:auto;grid-column:2;grid-row:1;}
+ /* Other tools keep the exact original DOM and their active controls, aligned on one shared stage. */
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette){display:grid;grid-template-columns:minmax(210px,31%) minmax(0,1fr);grid-template-rows:minmax(0,1fr);align-items:center;column-gap:clamp(16px,2.7vw,50px);}
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette)>.stage-header{grid-column:1;grid-row:1;align-self:center;}
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette)>.centered-tool,
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette)>.teams-scene{grid-column:2;grid-row:1;align-self:center;justify-self:center;width:min(100%,650px);margin:0;}
+ body.fx-unified.fx-home .tool-stage:not(#stage-roulette)>.teams-scene{justify-self:stretch;}
+ body.fx-unified.fx-home #stage-coin .coin-scene{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+ body.fx-unified.fx-home #stage-random .random-scene,body.fx-unified.fx-home #stage-timer .timer-scene{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+}
+body.fx-unified.fx-home #stage-coin .coin{
+  /* Keep the original 3D rotation, duration, rise and fall; render the reverse side too. */
+  backface-visibility:visible;-webkit-backface-visibility:visible;
+}
+@media(max-width:690px){
+ body.fx-unified.fx-home #stage-roulette .fx-roulette-info{display:flex;flex-direction:column;gap:12px;align-self:stretch;}
+ body.fx-unified.fx-home #stage-roulette .roulette-side{width:100%;max-width:350px;align-self:flex-start;}
+ body.fx-unified.fx-home #stage-roulette .roulette-scene{display:flex;align-items:center;justify-content:center;}
+}
